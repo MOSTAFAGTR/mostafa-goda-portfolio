@@ -32,7 +32,7 @@ const PROFILE = {
   phone: "+201099307299",
   github: "https://github.com/MOSTAFAGTR",
   linkedin: "https://www.linkedin.com/in/mostafa-goda-008251275/",
-  resume: "/Mostafa_Goda_Resume.pdf",
+  resume: `${import.meta.env.BASE_URL}Mostafa_Goda_Resume.pdf`,
 
   // Optional: fill these only if they are accurate and public.
   availability: "Open to Software Engineering opportunities",

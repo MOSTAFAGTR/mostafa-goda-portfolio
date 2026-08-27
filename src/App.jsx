@@ -29,7 +29,7 @@ const PROFILE = {
   positioning: "Backend systems · Secure platforms · Infrastructure",
   location: "Egypt",
   email: "magopa092@gmail.com",
-  phone: "+20 1099307299",
+  phone: "+201099307299",
   github: "https://github.com/MOSTAFAGTR",
   linkedin: "https://www.linkedin.com/in/mostafa-goda-008251275/",
   resume: "/Mostafa_Goda_Resume.pdf",
@@ -37,7 +37,7 @@ const PROFILE = {
   // Optional: fill these only if they are accurate and public.
   availability: "Open to Software Engineering opportunities",
   professionalNote:
-    "Interested in backend, full-stack, platform and security-oriented engineering work.",
+    "Interested in backend, platform, security, DevSecOps, cloud, and industrial software engineering roles.",
 };
 
 const FLAGSHIP = {
@@ -138,9 +138,10 @@ const EXPERIENCE = [
     bullets: [],
     tags: [
       "Industrial Automation",
+      "Mechatronics",
       "Technical Procurement",
-      "International Suppliers",
-      "Client Relations",
+      "Supplier Management",
+      "International Logistics",
       "Operations",
     ],
   },
@@ -154,16 +155,6 @@ const EXPERIENCE = [
     bullets: [],
     tags: ["PHP", "JavaScript", "MySQL", "Web Architecture"],
   },
-  // Add serious software roles here if applicable.
-  // {
-  //   period: "YYYY — YYYY",
-  //   company: "[COMPANY]",
-  //   role: "[ROLE]",
-  //   type: "Professional experience",
-  //   description: "[FILL]",
-  //   bullets: ["[FILL]", "[FILL]"],
-  //   tags: ["Backend", "Python", "Docker"],
-  // },
 ];
 
 const PROJECTS = [
@@ -206,26 +197,13 @@ const PROJECTS = [
     repo: "https://github.com/MOSTAFAGTR/Sql-injection",
     demo: "[FILL — demo URL or remove]",
   },
-  // Only add another project when it strengthens the engineering story.
-  // {
-  //   title: "[PROJECT]",
-  //   category: "[CATEGORY]",
-  //   featured: false,
-  //   description: "[FILL]",
-  //   problem: "[FILL]",
-  //   contribution: "[FILL]",
-  //   result: "[FILL]",
-  //   tags: ["[FILL]"],
-  //   repo: "[FILL]",
-  //   demo: "[FILL]",
-  // },
 ];
 
 const ENGINEERING_AREAS = [
   {
     title: "Backend Systems",
     lead: "Build services around clear boundaries, APIs, persistence and business logic.",
-    evidence: ["FastAPI", "Spring Boot", "REST APIs", "SQLAlchemy", "Pydantic", "JWT / RBAC"],
+    evidence: ["FastAPI", "Spring Boot", "Node.js", "REST APIs", "SQLAlchemy", "JWT / RBAC"],
   },
   {
     title: "Security Engineering",
@@ -238,32 +216,44 @@ const ENGINEERING_AREAS = [
     evidence: ["Docker", "Docker Compose", "Linux", "Resource limits", "Environment configuration"],
   },
   {
-    title: "Full-Stack Delivery",
-    lead: "Move across the stack when the product or system requires it.",
-    evidence: ["React", "TypeScript", "Vite", "HTML / CSS", "Dashboards", "Code editors"],
+    title: "Frontend & Design",
+    lead: "Deliver highly responsive, intuitive, and aesthetically polished user interfaces.",
+    evidence: ["React", "UI/UX Design", "TypeScript", "Tailwind CSS", "Dashboards", "SPA Development"],
   },
 ];
 
 const CORE_STACK = [
   {
-    label: "Primary",
-    value: "Python · FastAPI · TypeScript · React · SQL · Docker · MySQL",
+    label: "Languages",
+    value: "Python · C/C++ · Java · TypeScript · JavaScript · SQL · PHP · Dart",
   },
   {
-    label: "Backend",
-    value: "FastAPI · Spring Boot · Node.js · Express · SQLAlchemy · REST",
+    label: "Frontend & Design",
+    value: "React · UI/UX Design · Tailwind CSS · HTML/CSS · SPA Development · Vite · Recharts",
+  },
+  {
+    label: "Backend & Arch",
+    value: "FastAPI · Spring Boot · Node.js · Express.js · REST APIs · System Design · Microservices",
+  },
+  {
+    label: "Databases",
+    value: "MySQL · PostgreSQL · MongoDB · Oracle · SQLite · Relational Design · Multi-database Arch",
   },
   {
     label: "Security",
-    value: "OWASP · SAST · Semgrep · OSV.dev · JWT · RBAC · Sandboxing",
+    value: "Application Security · Secure Coding · OWASP · SAST · Semgrep · OSV.dev · JWT/RBAC · bcrypt",
   },
   {
-    label: "Infrastructure",
-    value: "Docker · Docker Compose · Linux · Git · GitHub",
+    label: "DevOps & Test",
+    value: "Docker · Docker Compose · Linux · Isolated Code Execution · JMeter · Automated/Performance Testing",
   },
   {
-    label: "Additional",
-    value: "[FILL — only technologies you can discuss confidently in an interview]",
+    label: "Mobile & AI",
+    value: "Flutter · Dart · Riverpod · OpenAI API Integration · LLM Prompting & Fallback Design",
+  },
+  {
+    label: "Industrial Domain",
+    value: "Mechatronics · Pneumatics (Festo/SMC) · Technical Sourcing · Supplier Mgmt · International Logistics",
   },
 ];
 
@@ -284,7 +274,7 @@ const PROOF_ITEMS = [
     number: "03",
     title: "Engineering practice",
     text:
-      "[FILL — tests, CI/CD, deployment, monitoring, performance measurements and code-quality evidence]",
+      "Apply structured problem decomposition, technical research, formal UML/SRS documentation, and testing methodologies.",
   },
   {
     number: "04",
@@ -298,19 +288,13 @@ const CREDENTIALS = [
   {
     title: "B.Sc. Computer Science",
     institution: "Misr International University",
-    detail: "Minor in Software Engineering · Graduated June 2026",
+    detail: "Graduated June 2026. Comprehensive foundation in software architecture, requirements engineering, relational database design, and algorithmic problem solving.",
   },
   {
-    title: "NTI / ITIDA Full-Stack Program",
-    institution: "120-hour intensive program",
-    detail: "Final score: 88.5%",
+    title: "Minor in Software Engineering",
+    institution: "Misr International University",
+    detail: "Advanced coursework centered on engineering scalable software, encompassing system architecture, formal requirements engineering (SRS/UML), Agile/Scrum lifecycles, and rigorous QA/testing. Applied practically through the end-to-end architectural design and delivery of the SCALE capstone.",
   },
-  // Add only meaningful certifications:
-  // {
-  //   title: "[CERTIFICATION]",
-  //   institution: "[ISSUER]",
-  //   detail: "[YEAR / CREDENTIAL ID]",
-  // },
 ];
 
 function ExternalIcon() {
@@ -338,6 +322,21 @@ function ArrowIcon() {
         strokeWidth="1.7"
         strokeLinecap="round"
         strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function PhoneIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path 
+        d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" 
+        fill="none" 
+        stroke="currentColor" 
+        strokeWidth="1.7" 
+        strokeLinecap="round" 
+        strokeLinejoin="round" 
       />
     </svg>
   );
@@ -1453,7 +1452,7 @@ export default function App() {
 
         .credential {
           height: 100%;
-          padding: 28px;
+          padding: 30px;
           background: var(--bg);
         }
 
@@ -1472,7 +1471,7 @@ export default function App() {
         .credential p {
           margin: 0;
           color: var(--muted);
-          font-size: 13px;
+          font-size: 14px;
           line-height: 1.65;
         }
 
@@ -1935,6 +1934,11 @@ export default function App() {
                       <ArrowIcon />
                     </a>
 
+                    <a className="button" href={`tel:${PROFILE.phone.replace(/\s+/g, '')}`}>
+                      <PhoneIcon />
+                      {PROFILE.phone}
+                    </a>
+
                     <a
                       className="button"
                       href={PROFILE.github}
@@ -1953,10 +1957,6 @@ export default function App() {
                     >
                       <DownloadIcon />
                       Resume
-                    </a>
-
-                    <a className="button" href="#contact">
-                      Contact
                     </a>
                   </div>
 
@@ -2405,34 +2405,30 @@ export default function App() {
                     </h2>
 
                     <p className="about-text">
-                      I graduated from Misr International University with a B.Sc. in
-                      Computer Science and a minor in Software Engineering in June 2026.
+                      I am a Software Engineer with a strong foundation in backend engineering, software architecture, cybersecurity, and full-stack development, complemented by several years of real-world experience in industrial automation, technical procurement, and operations. I have designed and built complex software systems using Python, FastAPI, Java, Spring Boot, React, TypeScript, Node.js, MySQL, Docker, and related technologies.
                     </p>
 
                     <p className="about-text">
-                      My strongest capability is not being tied to one language or
-                      framework. I can move between frontend, backend, infrastructure
-                      and security when the system requires it.
+                      My strongest technical experience comes from developing SCALE, a large security-focused platform combining containerized services, isolated execution of untrusted code, application security, SAST, dependency vulnerability scanning, AI integration, databases, and full-stack functionality. I am particularly strong at understanding complex systems, integrating multiple technologies, troubleshooting difficult technical problems, and translating requirements into practical implementations.
                     </p>
 
                     <p className="about-text">
-                      Alongside software engineering, I have more than five years of
-                      practical experience in an industrial automation business, working
-                      with technical components, suppliers, international procurement,
-                      clients and operations.
+                      While I focus heavily on robust backend architecture, I also bring strong expertise in frontend development and UI/UX design. This allows me to craft highly intuitive, responsive, and aesthetically polished user interfaces that seamlessly integrate with complex backend services.
                     </p>
 
                     <p className="about-text">
-                      That combination shaped how I approach engineering: understand the
-                      actual problem first, learn whatever domain knowledge is necessary,
-                      design the boundaries, and then build the system.
+                      Beyond software, my professional experience in industrial automation and technical sourcing has given me practical knowledge of pneumatic systems, mechatronics, industrial components, suppliers, procurement, and international logistics. This combination allows me to approach problems from both an engineering and business perspective.
+                    </p>
+
+                    <p className="about-text">
+                      I am especially interested in backend, platform, security, DevSecOps, cloud, and industrial software engineering, where I can apply my ability to build reliable systems, analyze technical problems deeply, and continuously develop toward advanced engineering roles.
                     </p>
                   </div>
                 </Reveal>
 
                 <Reveal delay={100}>
                   <div>
-                    <p className="eyebrow">CORE TOOLKIT</p>
+                    <p className="eyebrow">CORE TOOLKIT & SKILLS</p>
 
                     <div className="toolkit">
                       {CORE_STACK.map((item) => (
@@ -2456,7 +2452,7 @@ export default function App() {
                         <div className="credential-label">Credential</div>
                         <h3>{item.title}</h3>
                         <p>{item.institution}</p>
-                        <p style={{ marginTop: "5px" }}>{item.detail}</p>
+                        <p style={{ marginTop: "8px" }}>{item.detail}</p>
                       </article>
                     ))}
                   </div>
@@ -2489,6 +2485,11 @@ export default function App() {
                   <a className="button button-primary" href={`mailto:${PROFILE.email}`}>
                     <MailIcon />
                     Email me
+                  </a>
+
+                  <a className="button" href={`tel:${PROFILE.phone.replace(/\s+/g, '')}`}>
+                    <PhoneIcon />
+                    {PROFILE.phone}
                   </a>
 
                   <a

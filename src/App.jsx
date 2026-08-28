@@ -253,7 +253,7 @@ const CORE_STACK = [
   },
   {
     label: "Industrial Domain",
-    value: "Mechatronics · Pneumatics (Festo/SMC) · Technical Sourcing · Supplier Mgmt · International Logistics",
+    value: "Mechatronics · Pneumatics  · Technical Sourcing · Supplier Mgmt · International Logistics",
   },
 ];
 

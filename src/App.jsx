@@ -1,63 +1,79 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-/**
- * MOSTAFA GODA — SOFTWARE ENGINEER PORTFOLIO
- * ------------------------------------------------------------
- * Single-file React portfolio.
- *
- * Design goals:
- * - Recruiter-first information architecture
- * - Engineering evidence before technology lists
- * - Strong flagship case study without turning the portfolio
- *   into a thesis/documentation website
- * - Clear distinction between professional experience,
- *   engineering projects, and education
- * - Accessible navigation, reduced-motion support, keyboard focus
- * - Responsive from mobile upward
- *
- * BEFORE DEPLOYMENT:
- * 1. Replace every [FILL ...] placeholder.
- * 2. Add your real resume to /public/Mostafa_Goda_Resume.pdf.
- * 3. Add real project screenshots to /public/images/.
- * 4. Replace any optional links with real URLs.
- * 5. Only publish metrics you can defend in an interview.
- */
+/*
+  ============================================================
+  MOSTAFA GODA — SOFTWARE ENGINEER PORTFOLIO 
+  ============================================================
+
+  Design philosophy:
+  - Calm
+  - Editorial
+  - Engineering-first
+  - Minimal color
+  - Motion with purpose
+  - Evidence over decoration
+  - Recruiter-readable
+  - No animation libraries
+  - No icon libraries
+
+  Assets to add later:
+
+  /public/images/profile.png
+  /public/images/scale-dashboard.png
+  /public/images/scale-labs-challenges.png
+  /public/images/scale-red-vs-blue.png
+  /public/images/scale-security-logs.png
+  /public/images/scale-security-scanner.png
+  /public/images/scale-lab-attack.png
+  /public/images/scale-lab-fix.png
+  /public/images/scale-architecture.png
+  /public/images/inframate.png
+  /public/images/quizmaster.png
+
+  /public/videos/scale-marketing.mp4
+  /public/videos/scale-marketing.vtt
+  /public/Mostafa_Goda_Resume.pdf
+*/
 
 const PROFILE = {
   name: "Mostafa Goda",
   title: "Software Engineer",
   positioning: "Backend systems · Secure platforms · Infrastructure",
   location: "Egypt",
+
   email: "magopa092@gmail.com",
   phone: "+201099307299",
+
   github: "https://github.com/MOSTAFAGTR",
   linkedin: "https://www.linkedin.com/in/mostafa-goda-008251275/",
-  resume: 'https://MOSTAFAGTR.github.io/mostafa-goda-portfolio/Mostafa_Goda_Resume.pdf',
 
-  // Optional: fill these only if they are accurate and public.
+  resume: "./Mostafa_Goda_Resume.pdf",
+
   availability: "Open to Software Engineering opportunities",
-  professionalNote:
-    "Interested in backend, platform, security, DevSecOps, cloud, and industrial software engineering roles.",
 };
 
-const FLAGSHIP = {
+const SCALE = {
   name: "SCALE",
   fullName: "Secure Coding Learning Environment",
+
   repo: "https://github.com/MOSTAFAGTR/grad-project",
-  demo: "[FILL — live demo URL, or remove this button]",
-  caseStudy: "#scale",
+
   summary:
-    "A full-stack secure-coding platform designed around a difficult systems problem: validating learner-written security fixes without executing untrusted code directly inside the main application. The completed system integrates sandboxed execution, static analysis, dependency intelligence, AI-assisted learning, role-based workflows and analytics into one deployable platform.",
+    "A security-focused learning platform built around a difficult systems problem: safely executing and validating learner-written code without allowing that execution path to become part of the main application boundary.",
+
   problem:
-    "Security-training platforms need to execute code written by learners. Executing that code inside the application process would make the learning environment itself a security boundary. SCALE separates the high-risk execution path from the application and validates remediation in disposable environments.",
+    "Security-training platforms need to execute code written by learners. Executing that code directly inside the application process would make the learning environment itself part of the attack surface.",
+
   solution:
-    "The platform combines vulnerability labs, sandbox-validated remediation, static analysis, dependency scanning, authentication and RBAC, learning analytics, instructor workflows, AI-assisted quiz generation, and controlled Docker execution.",
+    "SCALE separates high-risk execution from the application using disposable Docker environments, while combining vulnerability labs, sandbox-validated remediation, authentication, RBAC, static analysis, dependency intelligence, analytics and AI-assisted learning.",
+
   metrics: [
-    { value: "10", label: "interactive security labs" },
-    { value: "128", label: "documented API routes" },
-    { value: "32", label: "functional requirements verified" },
-    { value: "4.1–4.5 / 5", label: "user evaluation scores" },
+    ["10", "interactive security labs"],
+    ["128", "documented API routes"],
+    ["32", "functional requirements verified"],
+    ["4.1–4.5 / 5", "user evaluation scores"],
   ],
+
   stack: [
     "Python",
     "FastAPI",
@@ -68,32 +84,34 @@ const FLAGSHIP = {
     "Semgrep",
     "OSV.dev",
   ],
+
   architecture: [
     {
-      n: "01",
+      number: "01",
       title: "Client",
       text:
-        "React + TypeScript SPA with role-aware interfaces, dashboards, learning flows and browser-based code editing.",
+        "React + TypeScript SPA with dashboards, learning flows, role-aware interfaces and browser-based code editing.",
     },
     {
-      n: "02",
+      number: "02",
       title: "Application",
       text:
-        "FastAPI backend with routing, service, ORM/domain and infrastructure responsibilities separated into explicit layers.",
+        "FastAPI backend with explicit routing, service, ORM/domain and infrastructure responsibilities.",
     },
     {
-      n: "03",
+      number: "03",
       title: "Security",
       text:
         "JWT authentication, RBAC, security-event logging, static analysis and dependency vulnerability intelligence.",
     },
     {
-      n: "04",
+      number: "04",
       title: "Execution",
       text:
         "Disposable Docker environments validate learner fixes against controlled tests with bounded resources and network isolation.",
     },
   ],
+
   controls: [
     "Ephemeral execution containers",
     "Network isolation",
@@ -108,6 +126,7 @@ const FLAGSHIP = {
     "Role-based authorization",
     "Security event logging",
   ],
+
   decisions: [
     {
       title: "Why a hybrid architecture?",
@@ -122,10 +141,53 @@ const FLAGSHIP = {
     {
       title: "What is the remaining boundary?",
       text:
-        "Docker is an isolation mechanism, not a perfect hostile-code security boundary. The reference deployment still relies on the host kernel and Docker access. Stronger production isolation would require additional hardening or a stronger sandbox technology.",
+        "Docker is an isolation mechanism, not a perfect hostile-code security boundary. The reference deployment still relies on the host kernel and Docker access. Stronger production isolation would require additional hardening or stronger sandbox technology.",
     },
   ],
 };
+
+const SCALE_GALLERY = [
+  {
+    src: "./images/scale-dashboard.png",
+    alt: "SCALE dashboard",
+    label: "Dashboard",
+  },
+  {
+    src: "./images/scale-labs-challenges.png",
+    alt: "SCALE labs and challenges",
+    label: "Labs & Challenges",
+  },
+  {
+    src: "./images/scale-red-vs-blue.png",
+    alt: "SCALE Red vs Blue security challenge",
+    label: "Red vs Blue",
+  },
+  {
+    src: "./images/scale-security-logs.png",
+    alt: "SCALE security event logs",
+    label: "Security Logs",
+  },
+  {
+    src: "./images/scale-security-scanner.png",
+    alt: "SCALE security scanner",
+    label: "Security Scanner",
+  },
+  {
+    src: "./images/scale-lab-attack.png",
+    alt: "SCALE security lab attack page",
+    label: "Lab · Attack",
+  },
+  {
+    src: "./images/scale-lab-fix.png",
+    alt: "SCALE security lab fix page",
+    label: "Lab · Fix",
+  },
+  {
+    src: "./images/scale-architecture.png",
+    alt: "SCALE system architecture",
+    label: "Architecture",
+  },
+];
 
 const EXPERIENCE = [
   {
@@ -134,8 +196,7 @@ const EXPERIENCE = [
     role: "Co-Manager · Procurement & Operations",
     type: "Professional experience",
     description:
-      "Five+ years of practical responsibility across industrial automation, technical procurement, international importation, supplier management, client relationships and banking operations. Work includes technically evaluating pneumatic, mechatronic and factory-automation components, sourcing internationally, handling supplier accounts and resolving operational issues. Covered all company operations solo for a week during a staffing gap.",
-    bullets: [],
+      "Five+ years of practical responsibility across industrial automation, technical procurement, international importation, supplier management, client relationships and banking operations.",
     tags: [
       "Industrial Automation",
       "Mechatronics",
@@ -152,8 +213,12 @@ const EXPERIENCE = [
     type: "Technical training",
     description:
       "Completed an intensive 120-hour full-stack development program with a final score of 88.5%, covering web architecture, JavaScript, PHP, MySQL and software-engineering fundamentals.",
-    bullets: [],
-    tags: ["PHP", "JavaScript", "MySQL", "Web Architecture"],
+    tags: [
+      "PHP",
+      "JavaScript",
+      "MySQL",
+      "Web Architecture",
+    ],
   },
 ];
 
@@ -161,156 +226,121 @@ const PROJECTS = [
   {
     title: "InfraMate",
     category: "BACKEND / JAVA",
-    featured: true,
     description:
       "Enterprise-style infrastructure management system built with Java, Spring Boot, Maven and Thymeleaf.",
-    problem: "[FILL — the business/engineering problem]",
-    contribution: "[FILL — exactly what you designed and implemented]",
-    result: "[FILL — measurable or demonstrable outcome]",
-    tags: ["Java", "Spring Boot", "Maven", "Thymeleaf"],
-    repo: "[FILL — repository URL]",
-    demo: "[FILL — demo URL or remove]",
+    repo: null,
+    image: "./images/inframate.png",
   },
   {
     title: "QuizMaster",
     category: "FULL-STACK",
-    featured: false,
     description:
       "Quiz platform with authentication, RBAC, instant grading and per-question result breakdown.",
-    problem: "[FILL — problem]",
-    contribution: "[FILL — your contribution]",
-    result: "[FILL — result]",
-    tags: ["React", "TypeScript", "Node.js", "Express", "JWT", "RBAC"],
     repo: "https://github.com/MOSTAFAGTR/quizMaster",
-    demo: "[FILL — demo URL or remove]",
+    image: "./images/quizmaster.png",
   },
   {
     title: "SQL Injection Prototype",
     category: "SECURITY / PROTOTYPE",
-    featured: false,
     description:
-      "Security-learning prototype used to demonstrate SQL injection behavior and remediation workflows.",
-    problem: "[FILL — problem]",
-    contribution: "[FILL — your contribution]",
-    result: "[FILL — result]",
-    tags: ["Python", "SQL", "Security", "OWASP"],
+      "Security-learning prototype demonstrating SQL injection behavior and remediation workflows.",
     repo: "https://github.com/MOSTAFAGTR/Sql-injection",
-    demo: "[FILL — demo URL or remove]",
+    image: null,
   },
 ];
 
-const ENGINEERING_AREAS = [
+const SKILLS = [
   {
     title: "Backend Systems",
-    lead: "Build services around clear boundaries, APIs, persistence and business logic.",
-    evidence: ["FastAPI", "Spring Boot", "Node.js", "REST APIs", "SQLAlchemy", "JWT / RBAC"],
+    description:
+      "Services, APIs, persistence and business logic built around clear boundaries.",
+    items: [
+      "Python",
+      "FastAPI",
+      "Java",
+      "Spring Boot",
+      "Node.js",
+      "REST APIs",
+      "SQLAlchemy",
+      "JWT / RBAC",
+    ],
   },
   {
     title: "Security Engineering",
-    lead: "Treat untrusted input, authorization and execution boundaries as architectural concerns.",
-    evidence: ["OWASP", "SAST", "Semgrep", "OSV.dev", "Sandboxed execution", "Security logging"],
+    description:
+      "Security treated as an architectural concern rather than a final checklist.",
+    items: [
+      "OWASP",
+      "Secure Coding",
+      "SAST",
+      "Semgrep",
+      "OSV.dev",
+      "Sandboxed Execution",
+      "Security Logging",
+    ],
   },
   {
     title: "Infrastructure",
-    lead: "Containerize services and make execution environments predictable, bounded and reproducible.",
-    evidence: ["Docker", "Docker Compose", "Linux", "Resource limits", "Environment configuration"],
+    description:
+      "Predictable, bounded and reproducible execution environments.",
+    items: [
+      "Docker",
+      "Docker Compose",
+      "Linux",
+      "Resource Limits",
+      "Environment Configuration",
+    ],
   },
   {
     title: "Frontend & Design",
-    lead: "Deliver highly responsive, intuitive, and aesthetically polished user interfaces.",
-    evidence: ["React", "UI/UX Design", "TypeScript", "Tailwind CSS", "Dashboards", "SPA Development"],
+    description:
+      "Interfaces that remain clear while integrating with complex systems.",
+    items: [
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "UI/UX",
+      "Dashboards",
+      "Vite",
+      "Recharts",
+    ],
   },
 ];
 
-const CORE_STACK = [
-  {
-    label: "Languages",
-    value: "Python · C/C++ · Java · TypeScript · JavaScript · SQL · PHP · Dart",
-  },
-  {
-    label: "Frontend & Design",
-    value: "React · UI/UX Design · Tailwind CSS · HTML/CSS · SPA Development · Vite · Recharts",
-  },
-  {
-    label: "Backend & Arch",
-    value: "FastAPI · Spring Boot · Node.js · Express.js · REST APIs · System Design · Microservices",
-  },
-  {
-    label: "Databases",
-    value: "MySQL · PostgreSQL · MongoDB · Oracle · SQLite · Relational Design · Multi-database Arch",
-  },
-  {
-    label: "Security",
-    value: "Application Security · Secure Coding · OWASP · SAST · Semgrep · OSV.dev · JWT/RBAC · bcrypt",
-  },
-  {
-    label: "DevOps & Test",
-    value: "Docker · Docker Compose · Linux · Isolated Code Execution · JMeter · Automated/Performance Testing",
-  },
-  {
-    label: "Mobile & AI",
-    value: "Flutter · Dart · Riverpod · OpenAI API Integration · LLM Prompting & Fallback Design",
-  },
-  {
-    label: "Industrial Domain",
-    value: "Mechatronics · Pneumatics  · Technical Sourcing · Supplier Mgmt · International Logistics",
-  },
+const TOOLKIT = [
+  [
+    "Languages",
+    "Python · C/C++ · Java · TypeScript · JavaScript · SQL · PHP · Dart",
+  ],
+  [
+    "Frontend",
+    "React · TypeScript · UI/UX · Tailwind CSS · HTML/CSS · Vite · Recharts",
+  ],
+  [
+    "Backend",
+    "FastAPI · Spring Boot · Node.js · Express.js · REST APIs · System Design",
+  ],
+  [
+    "Databases",
+    "MySQL · PostgreSQL · MongoDB · Oracle · SQLite",
+  ],
+  [
+    "Security",
+    "Application Security · OWASP · SAST · Semgrep · OSV.dev · JWT/RBAC · bcrypt",
+  ],
+  [
+    "DevOps & Testing",
+    "Docker · Docker Compose · Linux · Isolated Code Execution · JMeter",
+  ],
+  [
+    "Mobile & AI",
+    "Flutter · Dart · Riverpod · OpenAI API Integration",
+  ],
+  [
+    "Industrial Domain",
+    "Mechatronics · Pneumatics · Technical Sourcing · Supplier Management",
+  ],
 ];
-
-const PROOF_ITEMS = [
-  {
-    number: "01",
-    title: "Architecture decisions",
-    text:
-      "Explain why a system is shaped the way it is—not merely which frameworks were used.",
-  },
-  {
-    number: "02",
-    title: "Security boundaries",
-    text:
-      "Model untrusted inputs and isolate high-risk execution paths rather than treating security as a final checklist.",
-  },
-  {
-    number: "03",
-    title: "Engineering practice",
-    text:
-      "Apply structured problem decomposition, technical research, formal UML/SRS documentation, and testing methodologies.",
-  },
-  {
-    number: "04",
-    title: "Real-world ownership",
-    text:
-      "Professional responsibility outside university adds evidence of judgment, communication and operational ownership.",
-  },
-];
-
-const CREDENTIALS = [
-  {
-    title: "B.Sc. Computer Science",
-    institution: "Misr International University",
-    detail: "Graduated June 2026. Comprehensive foundation in software architecture, requirements engineering, relational database design, and algorithmic problem solving.",
-  },
-  {
-    title: "Minor in Software Engineering",
-    institution: "Misr International University",
-    detail: "Advanced coursework centered on engineering scalable software, encompassing system architecture, formal requirements engineering (SRS/UML), Agile/Scrum lifecycles, and rigorous QA/testing. Applied practically through the end-to-end architectural design and delivery of the SCALE capstone.",
-  },
-];
-
-function ExternalIcon() {
-  return (
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path
-        d="M5 19 19 5M8 5h11v11"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.7"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
 
 function ArrowIcon() {
   return (
@@ -327,16 +357,16 @@ function ArrowIcon() {
   );
 }
 
-function PhoneIcon() {
+function ExternalIcon() {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path 
-        d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" 
-        fill="none" 
-        stroke="currentColor" 
-        strokeWidth="1.7" 
-        strokeLinecap="round" 
-        strokeLinejoin="round" 
+      <path
+        d="M5 19 19 5M8 5h11v11"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.7"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
@@ -353,7 +383,7 @@ function GithubIcon() {
   );
 }
 
-function LinkedInIcon() {
+function LinkedinIcon() {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true">
       <path
@@ -383,6 +413,21 @@ function MailIcon() {
   );
 }
 
+function PhoneIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.7"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 function DownloadIcon() {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -398,13 +443,33 @@ function DownloadIcon() {
   );
 }
 
+function PlayIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path
+        d="m9 6 9 6-9 6V6Z"
+        fill="currentColor"
+      />
+    </svg>
+  );
+}
+
 function Reveal({ children, className = "", delay = 0 }) {
   const ref = useRef(null);
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const element = ref.current;
+
     if (!element) return;
+
+    if (
+      window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      setVisible(true);
+      return;
+    }
 
     if (!("IntersectionObserver" in window)) {
       setVisible(true);
@@ -418,17 +483,21 @@ function Reveal({ children, className = "", delay = 0 }) {
           observer.unobserve(element);
         }
       },
-      { threshold: 0.08 }
+      {
+        threshold: 0.08,
+        rootMargin: "0px 0px -50px 0px",
+      }
     );
 
     observer.observe(element);
+
     return () => observer.disconnect();
   }, []);
 
   return (
     <div
       ref={ref}
-      className={`reveal ${visible ? "is-visible" : ""} ${className}`}
+      className={`reveal ${visible ? "visible" : ""} ${className}`}
       style={{ "--delay": `${delay}ms` }}
     >
       {children}
@@ -436,76 +505,334 @@ function Reveal({ children, className = "", delay = 0 }) {
   );
 }
 
-function isPlaceholder(value) {
-  return typeof value === "string" && value.includes("[FILL");
-}
+function Button({
+  children,
+  href,
+  primary = false,
+  external = false,
+  className = "",
+  onClick,
+}) {
+  const classes = `button ${
+    primary ? "button-primary" : ""
+  } ${className}`;
 
-function OptionalLink({ href, children, primary = false }) {
-  if (!href || isPlaceholder(href)) return null;
+  if (onClick) {
+    return (
+      <button className={classes} type="button" onClick={onClick}>
+        {children}
+      </button>
+    );
+  }
 
   return (
     <a
-      className={`button ${primary ? "button-primary" : ""}`}
+      className={classes}
       href={href}
-      target={href.startsWith("http") ? "_blank" : undefined}
-      rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+      target={external ? "_blank" : undefined}
+      rel={external ? "noopener noreferrer" : undefined}
     >
       {children}
-      <ExternalIcon />
     </a>
   );
 }
 
-export default function App() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [decisionOpen, setDecisionOpen] = useState(null);
-
-  const navItems = useMemo(
-    () => [
-      ["work", "Work"],
-      ["engineering", "Engineering"],
-      ["experience", "Experience"],
-      ["about", "About"],
-      ["contact", "Contact"],
-    ],
-    []
-  );
+function ImageGallery({ onOpen }) {
+  const [current, setCurrent] = useState(0);
+  const [failed, setFailed] = useState({});
 
   useEffect(() => {
-    const originalTitle = document.title;
-    document.title = `${PROFILE.name} — ${PROFILE.title}`;
+    if (
+      window.matchMedia &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    ) {
+      return undefined;
+    }
 
-    return () => {
-      document.title = originalTitle;
-    };
+    const timer = window.setInterval(() => {
+      setCurrent((index) => (index + 1) % SCALE_GALLERY.length);
+    }, 6500);
+
+    return () => window.clearInterval(timer);
   }, []);
 
+  const previous = (event) => {
+    event.stopPropagation();
+    setCurrent((index) =>
+      (index - 1 + SCALE_GALLERY.length) % SCALE_GALLERY.length
+    );
+  };
+
+  const next = (event) => {
+    event.stopPropagation();
+    setCurrent((index) => (index + 1) % SCALE_GALLERY.length);
+  };
+
+  const image = SCALE_GALLERY[current];
+
+  return (
+    <div className="image-gallery" aria-label="SCALE project screenshots">
+      {!failed[current] ? (
+        <button
+          type="button"
+          className="gallery-image-button"
+          onClick={() => onOpen(current)}
+          aria-label={`Open ${image.label} image`}
+        >
+          <img
+            className="gallery-image"
+            src={image.src}
+            alt={image.alt}
+            loading={current === 0 ? "eager" : "lazy"}
+            onError={() =>
+              setFailed((items) => ({ ...items, [current]: true }))
+            }
+          />
+        </button>
+      ) : (
+        <button
+          type="button"
+          className="image-fallback gallery-fallback-button"
+          onClick={() => onOpen(current)}
+          aria-label={`Open ${image.label} image`}
+        >
+          <span>{image.label}</span>
+          <small>IMAGE PLACEHOLDER</small>
+        </button>
+      )}
+
+      <button
+        type="button"
+        className="gallery-arrow gallery-prev"
+        onClick={previous}
+        aria-label="Previous SCALE image"
+      >
+        ‹
+      </button>
+
+      <button
+        type="button"
+        className="gallery-arrow gallery-next"
+        onClick={next}
+        aria-label="Next SCALE image"
+      >
+        ›
+      </button>
+
+      <div className="gallery-overlay">
+        <span>
+          {String(current + 1).padStart(2, "0")} / {String(SCALE_GALLERY.length).padStart(2, "0")} · {image.label}
+        </span>
+
+        <div className="gallery-dots" aria-label="Choose SCALE image">
+          {SCALE_GALLERY.map((item, index) => (
+            <button
+              key={item.src}
+              type="button"
+              className={`gallery-dot ${index === current ? "active" : ""}`}
+              onClick={(event) => {
+                event.stopPropagation();
+                setCurrent(index);
+              }}
+              aria-label={`Show ${item.label}`}
+              aria-current={index === current ? "true" : undefined}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function VideoPanel({ onOpen }) {
+  const [videoFailed, setVideoFailed] = useState(false);
+
+  return (
+    <div className="video-panel">
+      {!videoFailed ? (
+        <video
+          className="scale-video"
+          muted
+          loop
+          playsInline
+          autoPlay
+          preload="metadata"
+          crossOrigin="anonymous"
+          poster="./images/scale-poster.jpg"
+          onError={() => setVideoFailed(true)}
+        >
+          <track
+            kind="subtitles"
+            src="./videos/scale-marketing.vtt"
+            srcLang="en"
+            label="English"
+            default
+          />
+          <source
+            src="./videos/scale-marketing.mp4"
+            type="video/mp4"
+          />
+        </video>
+      ) : (
+        <div className="video-fallback">
+          <div className="video-fallback-grid" />
+          <span className="video-code">SCALE / SYSTEM PREVIEW</span>
+          <strong>60 seconds of the system.</strong>
+          <small>
+            Add your marketing video to
+            <br />
+            /public/videos/scale-marketing.mp4
+          </small>
+        </div>
+      )}
+
+      <button
+        type="button"
+        className="video-overlay"
+        onClick={onOpen}
+        aria-label="Open SCALE marketing video"
+      >
+        <span className="play-circle">
+          <PlayIcon />
+        </span>
+
+        <span>
+          <small>OPTIONAL · 01:00</small>
+          <strong>Watch SCALE</strong>
+        </span>
+
+        <ArrowIcon />
+      </button>
+    </div>
+  );
+}
+
+function App() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [decisionOpen, setDecisionOpen] = useState(null);
+  const [videoOpen, setVideoOpen] = useState(false);
+  const [imageOpen, setImageOpen] = useState(false);
+  const [avatarOpen, setAvatarOpen] = useState(false);
+  const [imageIndex, setImageIndex] = useState(0);
+  const [activeSection, setActiveSection] = useState("work");
+  const [avatarFailed, setAvatarFailed] = useState(false);
+
+  useEffect(() => {
+    document.title = `${PROFILE.name} — ${PROFILE.title}`;
+
+    const sections = [
+      "work",
+      "architecture",
+      "engineering",
+      "experience",
+      "projects",
+      "about",
+      "contact",
+    ];
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort(
+            (a, b) =>
+              b.intersectionRatio - a.intersectionRatio
+          );
+
+        if (visible[0]) {
+          setActiveSection(visible[0].target.id);
+        }
+      },
+      {
+        rootMargin: "-25% 0px -60% 0px",
+        threshold: [0.05, 0.15, 0.3],
+      }
+    );
+
+    sections.forEach((id) => {
+      const element = document.getElementById(id);
+      if (element) observer.observe(element);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = videoOpen || imageOpen || avatarOpen
+      ? "hidden"
+      : "";
+
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [videoOpen, imageOpen, avatarOpen]);
+
+  useEffect(() => {
+    const onKeyDown = (event) => {
+      if (event.key === "Escape") {
+        setVideoOpen(false);
+        setImageOpen(false);
+        setAvatarOpen(false);
+      }
+
+      if (imageOpen && event.key === "ArrowRight") {
+        setImageIndex((index) => (index + 1) % SCALE_GALLERY.length);
+      }
+
+      if (imageOpen && event.key === "ArrowLeft") {
+        setImageIndex((index) =>
+          (index - 1 + SCALE_GALLERY.length) % SCALE_GALLERY.length
+        );
+      }
+    };
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [imageOpen]);
+
   const closeMenu = () => setMenuOpen(false);
+
+  const nav = [
+    ["work", "Work"],
+    ["architecture", "Architecture"],
+    ["engineering", "Engineering"],
+    ["experience", "Experience"],
+    ["about", "About"],
+    ["contact", "Contact"],
+  ];
 
   return (
     <>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&family=Space+Mono:wght@400;700&display=swap');
+
+        @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap');
 
         :root {
-          --bg: #0b0a09;
-          --bg-2: #100e0c;
-          --panel: #15120f;
-          --panel-2: #1a1612;
-          --text: #f3ecdf;
-          --text-soft: #d5cabb;
-          --muted: #a89c8b;
-          --muted-2: #776e61;
-          --accent: #c89b5c;
-          --accent-strong: #e0b879;
-          --line: rgba(200,155,92,.17);
-          --line-strong: rgba(200,155,92,.32);
-          --success: #a9c99e;
+          --bg: #090908;
+          --bg-soft: #0e0d0b;
+          --panel: #12110f;
+          --panel-light: #171512;
+
+          --text: #f2ece2;
+          --soft: #d2c8ba;
+          --muted: #9a9083;
+          --dim: #625b52;
+
+          --gold: #c49a61;
+          --gold-light: #dfb77d;
+
+          --line: rgba(196,154,97,.16);
+          --line-strong: rgba(196,154,97,.30);
+
+          --green: #a8c99a;
+
           --max: 1200px;
-          --nav-h: 72px;
+          --nav: 70px;
         }
 
-        * { box-sizing: border-box; }
+        * {
+          box-sizing: border-box;
+        }
 
         html {
           scroll-behavior: smooth;
@@ -516,97 +843,87 @@ export default function App() {
           margin: 0;
           background: var(--bg);
           color: var(--text);
-          font-family: Inter, system-ui, sans-serif;
+          font-family: Manrope, system-ui, sans-serif;
           -webkit-font-smoothing: antialiased;
           text-rendering: optimizeLegibility;
         }
 
-        body, button, a { -webkit-font-smoothing: antialiased; }
+        body,
+        button,
+        a {
+          -webkit-font-smoothing: antialiased;
+        }
+
+        body::selection {
+          background: var(--gold);
+          color: var(--bg);
+        }
 
         a {
           color: inherit;
           text-decoration: none;
         }
 
-        button { font: inherit; }
+        button {
+          font: inherit;
+        }
+
+        button,
+        a {
+          -webkit-tap-highlight-color: transparent;
+        }
 
         a:focus-visible,
         button:focus-visible {
-          outline: 2px solid var(--accent-strong);
+          outline: 2px solid var(--gold-light);
           outline-offset: 4px;
         }
 
         ::selection {
-          background: var(--accent);
+          background: var(--gold);
           color: var(--bg);
         }
 
         .site {
           min-height: 100vh;
-          overflow-x: hidden;
+          overflow: hidden;
           background:
-            radial-gradient(circle at 78% 7%, rgba(200,155,92,.07), transparent 28rem),
+            radial-gradient(
+              circle at 76% 8%,
+              rgba(196,154,97,.055),
+              transparent 32rem
+            ),
             var(--bg);
         }
 
         .container {
-          width: min(var(--max), calc(100% - 48px));
+          width: min(
+            var(--max),
+            calc(100% - 56px)
+          );
           margin: 0 auto;
         }
 
         .mono {
-          font-family: "Space Mono", monospace;
+          font-family: "DM Mono", monospace;
         }
 
-        .eyebrow {
-          margin: 0 0 16px;
-          color: var(--accent-strong);
-          font: 700 11px/1.4 "Space Mono", monospace;
-          letter-spacing: .15em;
-          text-transform: uppercase;
-        }
-
-        .section {
-          padding: 104px 0;
-          border-top: 1px solid var(--line);
-        }
-
-        .section-header {
-          display: grid;
-          grid-template-columns: minmax(0, 1fr) minmax(280px, 500px);
-          align-items: end;
-          gap: 48px;
-          margin-bottom: 54px;
-        }
-
-        .section-title {
-          margin: 0;
-          max-width: 760px;
-          font: 800 clamp(34px, 4.7vw, 58px)/1.02 Manrope, sans-serif;
-          letter-spacing: -.055em;
-        }
-
-        .section-intro {
-          margin: 0;
-          color: var(--muted);
-          font-size: 16px;
-          line-height: 1.78;
-        }
-
-        /* NAV */
+        /* ================================================
+           NAVIGATION
+        ================================================ */
 
         .nav {
           position: fixed;
-          inset: 0 0 auto;
           z-index: 100;
+          inset: 0 0 auto;
           border-bottom: 1px solid var(--line);
-          background: rgba(11,10,9,.88);
-          backdrop-filter: blur(18px);
-          -webkit-backdrop-filter: blur(18px);
+          background: rgba(9,9,8,.82);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
         }
 
         .nav-inner {
-          min-height: var(--nav-h);
+          min-height: var(--nav);
           display: flex;
           align-items: center;
           justify-content: space-between;
@@ -615,8 +932,10 @@ export default function App() {
         .brand {
           display: inline-flex;
           align-items: center;
-          gap: 12px;
-          font: 700 14px Manrope, sans-serif;
+          gap: 11px;
+          font-size: 13px;
+          font-weight: 700;
+          letter-spacing: -.02em;
         }
 
         .brand-mark {
@@ -624,43 +943,76 @@ export default function App() {
           height: 30px;
           display: grid;
           place-items: center;
-          border: 1px solid var(--accent);
-          color: var(--accent-strong);
-          font: 700 10px "Space Mono", monospace;
-          letter-spacing: -.04em;
+          border: 1px solid var(--gold);
+          color: var(--gold-light);
+          font: 500 10px "DM Mono", monospace;
+          position: relative;
+          overflow: hidden;
+        }
+
+        .brand-mark::after {
+          content: "";
+          position: absolute;
+          left: 0;
+          right: 0;
+          height: 1px;
+          background: var(--gold-light);
+          opacity: .5;
+          animation: brandScan 3.5s ease-in-out infinite;
+        }
+
+        @keyframes brandScan {
+          0%, 100% { top: -2px; }
+          50% { top: 31px; }
         }
 
         .nav-links {
           display: flex;
           align-items: center;
-          gap: 28px;
-          color: var(--muted);
-          font: 12px "Space Mono", monospace;
-          letter-spacing: .06em;
+          gap: 25px;
         }
 
         .nav-links a {
-          transition: color .2s ease;
+          position: relative;
+          color: var(--muted);
+          font: 10px "DM Mono", monospace;
+          letter-spacing: .06em;
+          text-transform: uppercase;
+          padding: 7px 0;
+          transition:
+            color .25s ease,
+            transform .25s ease;
         }
 
         .nav-links a:hover {
           color: var(--text);
+          transform: translateY(-1px);
         }
 
-        .nav-cta {
-          display: inline-flex;
-          align-items: center;
-          min-height: 36px;
-          padding: 0 14px;
+        .nav-links a.active {
+          color: var(--gold-light);
+        }
+
+        .nav-links a.active::after {
+          content: "";
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          height: 1px;
+          background: var(--gold);
+        }
+
+        .nav-resume {
+          min-height: 35px !important;
+          padding: 0 13px !important;
           border: 1px solid var(--line-strong);
-          color: var(--text);
-          font: 700 11px "Space Mono", monospace;
-          transition: .2s ease;
+          display: inline-flex !important;
+          align-items: center;
         }
 
-        .nav-cta:hover {
-          border-color: var(--accent);
-          color: var(--accent-strong);
+        .nav-resume:hover {
+          border-color: var(--gold) !important;
         }
 
         .menu-button {
@@ -673,74 +1025,202 @@ export default function App() {
           cursor: pointer;
         }
 
-        .nav-mobile {
+        .mobile-menu {
           display: none;
         }
 
-        /* HERO */
+        /* ================================================
+           HERO
+        ================================================ */
 
         .hero {
           position: relative;
-          min-height: 790px;
+          min-height: 850px;
           display: flex;
           align-items: center;
-          padding: 145px 0 92px;
+          padding: 150px 0 100px;
         }
 
         .hero-grid {
           position: absolute;
-          inset: var(--nav-h) 0 0;
+          inset: var(--nav) 0 0;
           pointer-events: none;
-          opacity: .5;
+          opacity: .45;
+
           background-image:
-            linear-gradient(rgba(200,155,92,.042) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(200,155,92,.042) 1px, transparent 1px);
+            linear-gradient(
+              rgba(196,154,97,.035) 1px,
+              transparent 1px
+            ),
+            linear-gradient(
+              90deg,
+              rgba(196,154,97,.035) 1px,
+              transparent 1px
+            );
+
           background-size: 64px 64px;
-          mask-image: linear-gradient(to bottom, black, transparent 78%);
-          -webkit-mask-image: linear-gradient(to bottom, black, transparent 78%);
+
+          mask-image:
+            linear-gradient(
+              to bottom,
+              black 0%,
+              black 28%,
+              transparent 82%
+            );
+
+          animation: gridDrift 18s linear infinite;
+        }
+
+        @keyframes gridDrift {
+          from {
+            background-position: 0 0;
+          }
+          to {
+            background-position: 64px 64px;
+          }
+        }
+
+        .hero-glow {
+          position: absolute;
+          width: 480px;
+          height: 480px;
+          right: -170px;
+          top: 90px;
+          border-radius: 50%;
+          pointer-events: none;
+
+          background:
+            radial-gradient(
+              circle,
+              rgba(196,154,97,.075),
+              rgba(196,154,97,.018) 40%,
+              transparent 70%
+            );
+
+          animation: breathe 8s ease-in-out infinite;
+        }
+
+        @keyframes breathe {
+          0%, 100% {
+            transform: scale(.96);
+            opacity: .7;
+          }
+
+          50% {
+            transform: scale(1.05);
+            opacity: 1;
+          }
         }
 
         .hero-content {
           position: relative;
-          max-width: 1040px;
+          z-index: 2;
+          max-width: 1080px;
+        }
+
+        /* ================================================
+           PROFILE AVATAR (HERO TOP ROW)
+        ================================================ */
+
+        .hero-top-row {
+          display: flex;
+          align-items: center;
+          gap: 20px;
+          margin-bottom: 25px;
+        }
+
+        .hero-avatar {
+          background: transparent;
+          border: none;
+          padding: 0;
+          cursor: zoom-in;
+          border-radius: 50%;
+        }
+
+        .avatar-ring {
+          width: 75px;
+          height: 75px;
+          border-radius: 50%;
+          border: 1px solid var(--gold);
+          padding: 4px;
+          position: relative;
+          background: rgba(196,154,97,.05);
+          transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.4s ease;
+        }
+
+        .hero-avatar:hover .avatar-ring {
+          transform: scale(1.08);
+          border-color: var(--gold-light);
+        }
+
+        .avatar-ring img {
+          width: 100%;
+          height: 100%;
+          border-radius: 50%;
+          object-fit: cover;
+          display: block;
+          background: var(--bg-soft);
+        }
+
+        .avatar-fallback {
+          position: absolute;
+          inset: 4px;
+          border-radius: 50%;
+          background: var(--panel);
+          color: var(--gold);
+          font: 500 22px "DM Mono", monospace;
+          display: flex;
+          align-items: center;
+          justify-content: center;
         }
 
         .hero-kicker {
-          display: inline-flex;
+          display: flex;
           align-items: center;
           gap: 11px;
-          margin-bottom: 24px;
-          color: var(--accent-strong);
-          font: 700 12px "Space Mono", monospace;
-          letter-spacing: .08em;
+          color: var(--gold-light);
+          font: 500 10px "DM Mono", monospace;
+          letter-spacing: .09em;
           text-transform: uppercase;
+          margin: 0;
         }
 
         .hero-kicker::before {
           content: "";
           width: 34px;
           height: 1px;
-          background: var(--accent);
+          background: var(--gold);
+          transform-origin: left center;
+          animation: kickerLine 3.2s ease-in-out infinite;
+        }
+
+        @keyframes kickerLine {
+          0%, 100% { transform: scaleX(.72); opacity: .5; }
+          50% { transform: scaleX(1); opacity: 1; }
         }
 
         .hero h1 {
           max-width: 1000px;
           margin: 0;
-          font: 800 clamp(48px, 6.6vw, 82px)/.96 Manrope, sans-serif;
-          letter-spacing: -.068em;
+
+          font-size: clamp(50px, 7vw, 88px);
+          line-height: .95;
+          font-weight: 800;
+          letter-spacing: -.072em;
         }
 
         .hero h1 em {
-          color: var(--accent);
+          color: var(--gold);
           font-style: normal;
         }
 
         .hero-subtitle {
-          max-width: 760px;
+          max-width: 720px;
           margin: 30px 0 0;
-          color: var(--text-soft);
-          font-size: clamp(18px, 2vw, 21px);
-          line-height: 1.7;
+
+          color: var(--soft);
+          font-size: clamp(16px, 1.8vw, 19px);
+          line-height: 1.75;
         }
 
         .hero-subtitle strong {
@@ -751,8 +1231,8 @@ export default function App() {
         .hero-actions {
           display: flex;
           flex-wrap: wrap;
-          gap: 10px;
-          margin-top: 34px;
+          gap: 9px;
+          margin-top: 33px;
         }
 
         .button {
@@ -761,197 +1241,696 @@ export default function App() {
           align-items: center;
           justify-content: center;
           gap: 9px;
-          padding: 0 16px;
+
+          padding: 0 15px;
+
           border: 1px solid var(--line-strong);
           background: transparent;
           color: var(--text);
-          font: 700 11px "Space Mono", monospace;
+
+          font: 500 10px "DM Mono", monospace;
           letter-spacing: .02em;
-          transition: transform .2s ease, border-color .2s ease, background .2s ease, color .2s ease;
+
           cursor: pointer;
+
+          transition:
+            transform .25s cubic-bezier(.2,.8,.2,1),
+            border-color .25s ease,
+            background .25s ease,
+            color .25s ease;
         }
 
         .button svg {
-          width: 15px;
-          height: 15px;
+          width: 14px;
+          height: 14px;
           flex: 0 0 auto;
+        }
+
+        .button {
+          position: relative;
+          overflow: hidden;
+        }
+
+        .button::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: -70%;
+          width: 45%;
+          background: linear-gradient(90deg, transparent, rgba(255,255,255,.10), transparent);
+          transform: skewX(-18deg);
+          transition: left .7s ease;
+          pointer-events: none;
+        }
+
+        .button:hover::after {
+          left: 130%;
         }
 
         .button:hover {
           transform: translateY(-2px);
-          border-color: var(--accent);
-          color: var(--accent-strong);
+          border-color: var(--gold);
+          color: var(--gold-light);
+        }
+
+        .button:active {
+          transform: translateY(0);
         }
 
         .button-primary {
-          border-color: var(--accent);
-          background: var(--accent);
+          background: var(--gold);
+          border-color: var(--gold);
           color: var(--bg);
         }
 
         .button-primary:hover {
-          background: var(--accent-strong);
-          border-color: var(--accent-strong);
+          background: var(--gold-light);
+          border-color: var(--gold-light);
           color: var(--bg);
         }
 
         .hero-proof {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
-          margin-top: 64px;
+          margin-top: 70px;
+
           border-top: 1px solid var(--line);
           border-bottom: 1px solid var(--line);
         }
 
         .proof-stat {
-          min-height: 110px;
+          min-height: 105px;
           display: flex;
           flex-direction: column;
           justify-content: center;
-          padding: 20px 22px;
+          padding: 18px 20px;
+
           border-right: 1px solid var(--line);
+          position: relative;
+          overflow: hidden;
         }
 
-        .proof-stat:last-child { border-right: 0; }
+        .proof-stat:last-child {
+          border-right: 0;
+        }
+
+        .proof-stat::after {
+          content: "";
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          height: 1px;
+          width: 0;
+          background: var(--gold);
+          transition: width .45s ease;
+        }
+
+        .proof-stat:hover::after {
+          width: 100%;
+        }
 
         .proof-stat strong {
-          color: var(--text);
-          font: 700 23px "Space Mono", monospace;
+          font: 500 21px "DM Mono", monospace;
           letter-spacing: -.05em;
         }
 
         .proof-stat span {
           margin-top: 8px;
           color: var(--muted);
-          font-size: 11px;
+          font-size: 10px;
           line-height: 1.45;
         }
 
-        /* WORK / SCALE */
+        /* ================================================
+           GENERAL
+        ================================================ */
 
-        .flagship {
-          border: 1px solid var(--line-strong);
-          background:
-            linear-gradient(135deg, rgba(200,155,92,.065), transparent 48%),
-            var(--panel);
+        .section {
+          position: relative;
+          padding: 110px 0;
+          border-top: 1px solid var(--line);
         }
 
-        .flagship-top {
+        .section-header {
           display: grid;
-          grid-template-columns: minmax(0, 1.15fr) minmax(300px, .85fr);
-          min-height: 460px;
+          grid-template-columns: minmax(0, 1fr) minmax(280px, 470px);
+          gap: 60px;
+          align-items: end;
+          margin-bottom: 55px;
         }
 
-        .flagship-copy {
-          padding: 48px;
-          border-right: 1px solid var(--line);
-        }
-
-        .flagship-label {
-          color: var(--accent);
-          font: 700 10px "Space Mono", monospace;
+        .eyebrow {
+          margin: 0 0 15px;
+          color: var(--gold-light);
+          font: 500 10px "DM Mono", monospace;
           letter-spacing: .14em;
           text-transform: uppercase;
         }
 
-        .flagship h3 {
-          margin: 24px 0 0;
-          font: 800 clamp(52px, 7vw, 78px)/.92 Manrope, sans-serif;
-          letter-spacing: -.075em;
+        .section-title {
+          margin: 0;
+          max-width: 800px;
+
+          font-size: clamp(37px, 5vw, 60px);
+          line-height: 1;
+          font-weight: 800;
+          letter-spacing: -.06em;
         }
 
-        .flagship-fullname {
-          margin-top: 12px;
-          color: var(--accent-strong);
-          font: 700 12px "Space Mono", monospace;
-          letter-spacing: .05em;
+        .section-intro {
+          margin: 0;
+          color: var(--muted);
+          font-size: 14px;
+          line-height: 1.85;
+        }
+
+        /* ================================================
+           REVEAL
+        ================================================ */
+
+        .reveal {
+          opacity: 0;
+          transform: translate3d(0, 22px, 0);
+          transition:
+            opacity .7s ease var(--delay),
+            transform .7s cubic-bezier(.2,.75,.2,1) var(--delay);
+        }
+
+        .reveal.visible {
+          opacity: 1;
+          transform: translate3d(0,0,0);
+        }
+
+        /* ================================================
+           SCALE
+        ================================================ */
+
+        .scale-shell {
+          position: relative;
+        }
+
+        .scale-card {
+          border: 1px solid var(--line-strong);
+          background:
+            linear-gradient(
+              135deg,
+              rgba(196,154,97,.055),
+              transparent 45%
+            ),
+            var(--panel);
+          position: relative;
+          overflow: hidden;
+        }
+
+        .scale-card::before {
+          content: "";
+          position: absolute;
+          width: 500px;
+          height: 500px;
+          right: -260px;
+          top: -260px;
+          border-radius: 50%;
+          border: 1px solid rgba(196,154,97,.08);
+          box-shadow:
+            0 0 0 70px rgba(196,154,97,.012),
+            0 0 0 140px rgba(196,154,97,.008);
+          animation: orbitPulse 9s ease-in-out infinite;
+          pointer-events: none;
+        }
+
+        @keyframes orbitPulse {
+          0%, 100% {
+            transform: scale(.96) rotate(0deg);
+          }
+          50% {
+            transform: scale(1.04) rotate(5deg);
+          }
+        }
+
+        .scale-top {
+          display: grid;
+          grid-template-columns: minmax(0, 1.15fr) minmax(310px, .85fr);
+          min-height: 500px;
+        }
+
+        .scale-copy {
+          padding: 52px;
+          border-right: 1px solid var(--line);
+          position: relative;
+          z-index: 2;
+        }
+
+        .scale-label {
+          color: var(--gold);
+          font: 500 9px "DM Mono", monospace;
+          letter-spacing: .14em;
           text-transform: uppercase;
         }
 
-        .flagship-summary {
-          max-width: 690px;
-          margin: 28px 0 0;
-          color: var(--text-soft);
-          font-size: 17px;
-          line-height: 1.75;
+        .scale-name {
+          margin: 24px 0 0;
+
+          font-size: clamp(58px, 8vw, 92px);
+          line-height: .86;
+          font-weight: 800;
+          letter-spacing: -.085em;
         }
 
-        .flagship-actions {
+        .scale-fullname {
+          margin-top: 13px;
+          color: var(--gold-light);
+          font: 500 10px "DM Mono", monospace;
+          letter-spacing: .04em;
+          text-transform: uppercase;
+        }
+
+        .scale-summary {
+          max-width: 690px;
+          margin: 29px 0 0;
+
+          color: var(--soft);
+          font-size: 15px;
+          line-height: 1.85;
+        }
+
+        .scale-actions {
           display: flex;
           flex-wrap: wrap;
-          gap: 10px;
-          margin-top: 30px;
+          gap: 9px;
+          margin-top: 29px;
         }
 
         .tag-list {
           display: flex;
           flex-wrap: wrap;
-          gap: 7px;
-          margin-top: 24px;
+          gap: 6px;
+          margin-top: 23px;
         }
 
         .tag {
-          padding: 6px 9px;
+          padding: 6px 8px;
           border: 1px solid var(--line);
           color: var(--muted);
-          font: 10px "Space Mono", monospace;
+          font: 9px "DM Mono", monospace;
+          transition:
+            border-color .25s ease,
+            color .25s ease,
+            transform .25s ease;
         }
 
-        .flagship-metrics {
+        .tag:hover {
+          border-color: var(--line-strong);
+          color: var(--gold-light);
+          transform: translateY(-1px);
+        }
+
+        .scale-metrics {
           display: grid;
           grid-template-columns: 1fr 1fr;
         }
 
         .metric {
-          min-height: 170px;
+          min-height: 175px;
           display: flex;
           flex-direction: column;
           justify-content: center;
           padding: 30px;
           border-bottom: 1px solid var(--line);
           border-right: 1px solid var(--line);
+          position: relative;
+          overflow: hidden;
         }
 
-        .metric:nth-child(2n) { border-right: 0; }
-        .metric:nth-last-child(-n+2) { border-bottom: 0; }
+        .metric:nth-child(2n) {
+          border-right: 0;
+        }
+
+        .metric:nth-last-child(-n+2) {
+          border-bottom: 0;
+        }
+
+        .metric::before {
+          content: "";
+          position: absolute;
+          width: 90px;
+          height: 90px;
+          right: -35px;
+          bottom: -35px;
+          border-radius: 50%;
+          border: 1px solid rgba(196,154,97,.08);
+          transition: transform .5s ease;
+        }
+
+        .metric:hover::before {
+          transform: scale(1.8);
+        }
 
         .metric-value {
-          color: var(--text);
-          font: 700 clamp(27px, 4vw, 44px) "Space Mono", monospace;
+          font: 500 clamp(26px, 4vw, 42px) "DM Mono", monospace;
           letter-spacing: -.07em;
         }
 
         .metric-label {
-          max-width: 130px;
+          max-width: 135px;
           margin-top: 9px;
           color: var(--muted);
-          font-size: 11px;
-          line-height: 1.45;
+          font-size: 10px;
+          line-height: 1.5;
         }
+
+        /* ================================================
+           SCALE MEDIA
+        ================================================ */
+
+        .scale-media {
+          display: grid;
+          grid-template-columns: 1.3fr 0.7fr;
+          gap: 12px;
+          margin-top: 12px;
+          align-items: stretch;
+        }
+
+        .image-gallery,
+        .video-panel {
+          position: relative;
+          width: 100%;
+          aspect-ratio: 16 / 9;
+          min-height: 0;
+          border: 1px solid var(--line);
+          background: #0c0b0a;
+          overflow: hidden;
+        }
+
+        .image-gallery {
+          isolation: isolate;
+        }
+
+        .gallery-image-button {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          padding: 0;
+          border: 0;
+          background: #0c0b0a;
+          cursor: zoom-in;
+        }
+
+        .gallery-image {
+          display: block;
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          object-position: center;
+          background: #0c0b0a;
+          opacity: .94;
+          transition: transform .7s cubic-bezier(.2,.8,.2,1), opacity .35s ease;
+        }
+
+        .gallery-image-button:hover .gallery-image {
+          transform: scale(1.018);
+          opacity: 1;
+        }
+
+        .gallery-arrow {
+          position: absolute;
+          z-index: 5;
+          top: 50%;
+          width: 38px;
+          height: 38px;
+          display: grid;
+          place-items: center;
+          border: 1px solid rgba(196,154,97,.28);
+          background: rgba(9,9,8,.72);
+          backdrop-filter: blur(8px);
+          -webkit-backdrop-filter: blur(8px);
+          color: var(--text);
+          font: 300 25px/1 Manrope, sans-serif;
+          cursor: pointer;
+          opacity: 0;
+          transform: translateY(-50%);
+          transition: opacity .25s ease, background .25s ease, border-color .25s ease;
+        }
+
+        .image-gallery:hover .gallery-arrow,
+        .gallery-arrow:focus-visible {
+          opacity: 1;
+        }
+
+        .gallery-arrow:hover {
+          border-color: var(--gold);
+          background: rgba(196,154,97,.12);
+        }
+
+        .gallery-prev { left: 14px; }
+        .gallery-next { right: 14px; }
+
+        .gallery-overlay {
+          position: absolute;
+          z-index: 4;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          min-height: 58px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 18px;
+          padding: 14px 16px;
+          background: linear-gradient(to top, rgba(9,9,8,.92), rgba(9,9,8,.32));
+          pointer-events: none;
+        }
+
+        .gallery-overlay > span {
+          color: var(--soft);
+          font: 9px "DM Mono", monospace;
+          letter-spacing: .08em;
+          text-transform: uppercase;
+        }
+
+        .gallery-dots {
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          pointer-events: auto;
+        }
+
+        .gallery-dot {
+          width: 20px;
+          height: 3px;
+          padding: 0;
+          border: 0;
+          background: rgba(242,236,226,.24);
+          cursor: pointer;
+          transition: width .3s ease, background .3s ease;
+        }
+
+        .gallery-dot.active {
+          width: 30px;
+          background: var(--gold);
+        }
+
+        .gallery-fallback-button {
+          width: 100%;
+          height: 100%;
+          border: 0;
+          cursor: zoom-in;
+        }
+
+        .video-panel {
+          min-height: 0;
+        }
+
+        .scale-video {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          opacity: .72;
+        }
+
+        .video-overlay {
+          position: absolute;
+          z-index: 3;
+          inset: auto 0 0 0;
+          width: 100%;
+          min-height: 92px;
+          display: grid;
+          grid-template-columns: auto 1fr auto;
+          align-items: center;
+          gap: 15px;
+          padding: 20px;
+          border: 0;
+          border-top: 1px solid rgba(196,154,97,.16);
+          background: linear-gradient(to top, rgba(9,9,8,.95), rgba(9,9,8,.55));
+          color: var(--text);
+          text-align: left;
+          cursor: pointer;
+          transition: background .35s ease, min-height .35s ease;
+        }
+
+        .video-panel:hover .video-overlay {
+          background: linear-gradient(to top, rgba(9,9,8,.97), rgba(9,9,8,.62));
+        }
+
+        .video-panel:hover .play-circle {
+          animation: playBreath 1.8s ease-in-out infinite;
+        }
+
+        .play-circle {
+          width: 42px;
+          height: 42px;
+          display: grid;
+          place-items: center;
+          border: 1px solid var(--line-strong);
+          border-radius: 50%;
+          transition: transform .3s ease, border-color .3s ease, background .3s ease;
+        }
+
+        .play-circle svg {
+          width: 14px;
+          height: 14px;
+          margin-left: 2px;
+        }
+        
+        .video-overlay:hover .play-circle {
+          transform: scale(1.08);
+          border-color: var(--gold);
+          background: var(--gold);
+          color: var(--bg);
+        }
+
+        .video-overlay small {
+          display: block;
+          color: var(--gold);
+          font: 9px "DM Mono", monospace;
+          letter-spacing: .1em;
+        }
+
+        .video-overlay strong {
+          display: block;
+          margin-top: 5px;
+          font-size: 13px;
+        }
+
+        .video-overlay > svg {
+          width: 17px;
+          height: 17px;
+          color: var(--gold);
+        }
+
+        @keyframes playBreath {
+          0%, 100% { box-shadow: 0 0 0 rgba(196,154,97,0); }
+          50% { box-shadow: 0 0 0 7px rgba(196,154,97,.055); }
+        }
+
+        .image-modal {
+          position: fixed;
+          z-index: 600;
+          inset: 0;
+          display: grid;
+          place-items: center;
+          padding: 25px;
+          background: rgba(4,4,3,.9);
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+          animation: modalIn .25s ease;
+        }
+
+        .image-modal-inner {
+          width: min(1200px, 100%);
+          position: relative;
+          border: 1px solid var(--line-strong);
+          background: var(--bg);
+          box-shadow: 0 30px 100px rgba(0,0,0,.55);
+        }
+
+        .image-modal-stage {
+          position: relative;
+          display: grid;
+          place-items: center;
+          min-height: min(70vh, 760px);
+          padding: 20px;
+          background: #050504;
+          overflow: hidden;
+        }
+
+        .image-modal-stage img {
+          display: block;
+          max-width: 100%;
+          max-height: 68vh;
+          width: auto;
+          height: auto;
+          object-fit: contain;
+        }
+
+        .modal-media-arrow {
+          position: absolute;
+          top: 50%;
+          width: 46px;
+          height: 46px;
+          display: grid;
+          place-items: center;
+          border: 1px solid var(--line-strong);
+          background: rgba(9,9,8,.76);
+          color: var(--text);
+          font: 300 30px/1 Manrope, sans-serif;
+          cursor: pointer;
+          transform: translateY(-50%);
+          transition: background .25s ease, border-color .25s ease;
+        }
+
+        .modal-media-arrow:hover {
+          border-color: var(--gold);
+          background: rgba(196,154,97,.12);
+        }
+
+        .modal-media-prev { left: 18px; }
+        .modal-media-next { right: 18px; }
+
+        .image-modal-footer {
+          display: flex;
+          justify-content: space-between;
+          gap: 20px;
+          padding: 12px 15px;
+          border-top: 1px solid var(--line);
+          color: var(--muted);
+          font: 9px "DM Mono", monospace;
+          letter-spacing: .08em;
+          text-transform: uppercase;
+        }
+
+        /* ================================================
+           CASE STUDY
+        ================================================ */
 
         .case-study {
           display: grid;
-          grid-template-columns: .8fr 1.2fr;
-          gap: 60px;
-          margin-top: 42px;
+          grid-template-columns: .75fr 1.25fr;
+          gap: 70px;
+          margin-top: 55px;
         }
 
         .case-copy h3 {
           margin: 0;
-          font: 700 27px/1.15 Manrope, sans-serif;
-          letter-spacing: -.035em;
+          font-size: 27px;
+          line-height: 1.15;
+          font-weight: 700;
+          letter-spacing: -.04em;
         }
 
         .case-copy p {
           margin: 17px 0 0;
           color: var(--muted);
-          font-size: 15px;
-          line-height: 1.78;
+          font-size: 14px;
+          line-height: 1.85;
         }
 
         .case-block {
-          padding-bottom: 28px;
-          margin-bottom: 28px;
+          padding-bottom: 29px;
+          margin-bottom: 29px;
           border-bottom: 1px solid var(--line);
         }
 
@@ -962,35 +1941,49 @@ export default function App() {
         }
 
         .case-label {
-          color: var(--accent);
-          font: 700 10px "Space Mono", monospace;
-          letter-spacing: .13em;
+          color: var(--gold);
+          font: 500 9px "DM Mono", monospace;
+          letter-spacing: .12em;
           text-transform: uppercase;
         }
 
+        .case-block p {
+          margin: 10px 0 0;
+          color: var(--soft);
+          font-size: 14px;
+          line-height: 1.8;
+        }
+
+        /* ================================================
+           PIPELINE
+        ================================================ */
+
         .pipeline {
-          margin-top: 42px;
+          margin-top: 48px;
           border: 1px solid var(--line);
-          background: var(--bg-2);
+          background: var(--bg-soft);
         }
 
         .pipeline-header {
           display: flex;
-          align-items: center;
           justify-content: space-between;
-          padding: 16px 18px;
+          gap: 20px;
+          padding: 15px 17px;
           border-bottom: 1px solid var(--line);
         }
 
+        .pipeline-title,
+        .pipeline-note {
+          font: 9px "DM Mono", monospace;
+          letter-spacing: .08em;
+        }
+
         .pipeline-title {
-          color: var(--accent);
-          font: 700 10px "Space Mono", monospace;
-          letter-spacing: .1em;
+          color: var(--gold);
         }
 
         .pipeline-note {
-          color: var(--muted-2);
-          font: 10px "Space Mono", monospace;
+          color: var(--dim);
         }
 
         .pipeline-flow {
@@ -1000,85 +1993,116 @@ export default function App() {
 
         .pipeline-step {
           position: relative;
-          min-height: 130px;
-          padding: 19px 14px;
+          min-height: 135px;
+          padding: 18px 14px;
           border-right: 1px solid var(--line);
+          transition: background .3s ease;
         }
 
-        .pipeline-step:last-child { border-right: 0; }
+        .pipeline-step:hover {
+          background: rgba(196,154,97,.025);
+        }
+
+        .pipeline-step:last-child {
+          border-right: 0;
+        }
 
         .pipeline-step:not(:last-child)::after {
           content: "→";
           position: absolute;
+          right: -6px;
           top: 50%;
-          right: -7px;
           z-index: 2;
-          width: 14px;
+          color: var(--gold);
+          background: var(--bg-soft);
           transform: translateY(-50%);
-          background: var(--bg-2);
-          color: var(--accent);
-          text-align: center;
-          font: 12px "Space Mono", monospace;
+          font: 10px "DM Mono", monospace;
         }
 
         .pipeline-step small {
-          color: var(--muted-2);
-          font: 10px "Space Mono", monospace;
+          color: var(--dim);
+          font: 9px "DM Mono", monospace;
         }
 
         .pipeline-step strong {
           display: block;
-          margin-top: 22px;
-          font: 700 14px Manrope, sans-serif;
+          margin-top: 21px;
+          font-size: 12px;
         }
 
         .pipeline-step span {
           display: block;
           margin-top: 7px;
           color: var(--muted);
-          font-size: 11px;
-          line-height: 1.45;
+          font-size: 9px;
+          line-height: 1.5;
         }
 
-        /* ARCHITECTURE */
+        /* ================================================
+           ARCHITECTURE
+        ================================================ */
 
         .architecture-grid {
           display: grid;
           grid-template-columns: repeat(4, 1fr);
           gap: 1px;
-          border: 1px solid var(--line);
           background: var(--line);
+          border: 1px solid var(--line);
         }
 
         .architecture-card {
           min-height: 300px;
-          height: 100%;
-          padding: 30px 26px;
+          padding: 28px 25px;
           background: var(--bg);
-          transition: background .2s ease;
+          position: relative;
+          overflow: hidden;
+          transition:
+            background .3s ease,
+            transform .3s ease;
         }
 
-        .architecture-card:hover { background: var(--panel); }
+        .architecture-card::after {
+          content: "";
+          position: absolute;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          height: 1px;
+          background: var(--gold);
+          transform: scaleX(0);
+          transform-origin: left;
+          transition: transform .45s ease;
+        }
+
+        .architecture-card:hover {
+          background: var(--panel);
+        }
+
+        .architecture-card:hover::after {
+          transform: scaleX(1);
+        }
 
         .architecture-number {
-          color: var(--accent);
-          font: 700 11px "Space Mono", monospace;
+          color: var(--gold);
+          font: 500 10px "DM Mono", monospace;
         }
 
         .architecture-card h3 {
-          margin: 72px 0 12px;
-          font: 700 21px Manrope, sans-serif;
+          margin: 70px 0 12px;
+          font-size: 19px;
+          font-weight: 700;
+          letter-spacing: -.025em;
         }
 
         .architecture-card p {
           margin: 0;
           color: var(--muted);
-          font-size: 14px;
-          line-height: 1.7;
+          font-size: 12px;
+          line-height: 1.75;
         }
 
         .decision-list {
-          margin-top: 32px;
+          margin-top: 34px;
           border-top: 1px solid var(--line);
         }
 
@@ -1088,77 +2112,92 @@ export default function App() {
 
         .decision-button {
           width: 100%;
+          min-height: 70px;
           display: flex;
-          align-items: center;
           justify-content: space-between;
-          gap: 20px;
-          padding: 22px 0;
+          align-items: center;
+
+          padding: 0;
+
           border: 0;
           background: transparent;
           color: var(--text);
+
           text-align: left;
           cursor: pointer;
         }
 
         .decision-button span:first-child {
-          font: 700 13px "Space Mono", monospace;
+          font: 500 11px "DM Mono", monospace;
         }
 
         .decision-button span:last-child {
-          color: var(--accent);
+          color: var(--gold);
           font-size: 20px;
+          font-weight: 300;
         }
 
         .decision-content {
-          max-width: 800px;
-          padding: 0 0 25px;
+          max-width: 780px;
+          padding: 0 0 26px;
           color: var(--muted);
-          font-size: 14px;
-          line-height: 1.75;
+          font-size: 13px;
+          line-height: 1.8;
+          animation: decisionIn .25s ease;
         }
 
-        /* SECURITY */
+        @keyframes decisionIn {
+          from {
+            opacity: 0;
+            transform: translateY(-5px);
+          }
+
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        /* ================================================
+           SECURITY
+        ================================================ */
 
         .security-layout {
           display: grid;
-          grid-template-columns: .72fr 1.28fr;
+          grid-template-columns: .7fr 1.3fr;
           gap: 70px;
         }
 
-        .security-layout > .reveal {
-          height: 100%;
-        }
-
-        .security-layout > .reveal > .security-grid {
-          height: 100%;
-        }
-
         .security-title {
+          max-width: 540px;
           margin: 0;
-          max-width: 520px;
-          font: 700 clamp(32px, 4vw, 52px)/1.02 Manrope, sans-serif;
-          letter-spacing: -.045em;
+          font-size: clamp(32px, 4vw, 51px);
+          line-height: 1;
+          font-weight: 700;
+          letter-spacing: -.05em;
         }
 
         .security-intro {
-          max-width: 500px;
+          max-width: 510px;
           margin: 20px 0 0;
           color: var(--muted);
-          font-size: 15px;
-          line-height: 1.78;
+          font-size: 14px;
+          line-height: 1.8;
         }
 
         .security-boundary {
           margin-top: 28px;
-          padding: 20px;
-          border-left: 2px solid var(--accent);
-          background: rgba(200,155,92,.045);
+          padding: 18px 19px;
+          border-left: 2px solid var(--gold);
+          background: rgba(196,154,97,.035);
           color: var(--muted);
-          font-size: 13px;
-          line-height: 1.7;
+          font-size: 12px;
+          line-height: 1.75;
         }
 
-        .security-boundary strong { color: var(--text); }
+        .security-boundary strong {
+          color: var(--text);
+        }
 
         .security-grid {
           display: grid;
@@ -1169,21 +2208,29 @@ export default function App() {
         }
 
         .security-item {
-          display: flex;
-          gap: 12px;
-          padding: 19px 17px;
+          padding: 18px;
           background: var(--bg);
           color: var(--muted);
-          font: 11px/1.5 "Space Mono", monospace;
+          font: 9px/1.5 "DM Mono", monospace;
+          transition:
+            color .25s ease,
+            background .25s ease;
+        }
+
+        .security-item:hover {
+          background: var(--panel);
+          color: var(--soft);
         }
 
         .security-item::before {
           content: "✓";
-          color: var(--accent);
-          flex: 0 0 auto;
+          margin-right: 9px;
+          color: var(--gold);
         }
 
-        /* ENGINEERING */
+        /* ================================================
+           ENGINEERING
+        ================================================ */
 
         .proof-grid {
           display: grid;
@@ -1193,74 +2240,79 @@ export default function App() {
           background: var(--line);
         }
 
-        .proof-grid > .reveal,
-        .engineering-stack > .reveal,
-        .architecture-grid > .reveal,
-        .credentials > .reveal {
-          height: 100%;
-          min-width: 0;
-          background: var(--bg);
-        }
-
         .proof-card {
-          min-height: 250px;
-          height: 100%;
-          padding: 30px 25px;
+          min-height: 245px;
+          padding: 28px 24px;
           background: var(--bg);
+          transition: background .3s ease;
         }
 
-        .proof-card-number {
-          color: var(--accent);
-          font: 700 11px "Space Mono", monospace;
+        .proof-card:hover {
+          background: var(--panel);
+        }
+
+        .proof-number {
+          color: var(--gold);
+          font: 500 10px "DM Mono", monospace;
         }
 
         .proof-card h3 {
-          margin: 62px 0 12px;
-          font: 700 20px Manrope, sans-serif;
+          margin: 60px 0 11px;
+          font-size: 18px;
+          letter-spacing: -.03em;
         }
 
         .proof-card p {
           margin: 0;
           color: var(--muted);
-          font-size: 14px;
-          line-height: 1.68;
+          font-size: 12px;
+          line-height: 1.75;
         }
 
-        .engineering-stack {
+        .skills-grid {
           display: grid;
-          grid-template-columns: repeat(2, 1fr);
+          grid-template-columns: 1fr 1fr;
           gap: 1px;
           margin-top: 42px;
           border: 1px solid var(--line);
           background: var(--line);
         }
 
-        .engineering-card {
-          height: 100%;
-          min-width: 0;
-          padding: 30px;
+        .skill-card {
+          padding: 29px;
           background: var(--bg);
+          min-height: 210px;
+          transition:
+            background .3s ease,
+            transform .3s ease;
         }
 
-        .engineering-card h3 {
+        .skill-card:hover {
+          background: var(--panel);
+        }
+
+        .skill-card h3 {
           margin: 0;
-          font: 700 18px Manrope, sans-serif;
+          font-size: 18px;
         }
 
-        .engineering-lead {
+        .skill-description {
+          max-width: 490px;
           margin: 10px 0 20px;
           color: var(--muted);
-          font-size: 13px;
-          line-height: 1.65;
+          font-size: 12px;
+          line-height: 1.7;
         }
 
-        .evidence {
+        .skill-tags {
           display: flex;
           flex-wrap: wrap;
-          gap: 7px;
+          gap: 6px;
         }
 
-        /* EXPERIENCE */
+        /* ================================================
+           EXPERIENCE
+        ================================================ */
 
         .experience-list {
           border-top: 1px solid var(--line);
@@ -1268,71 +2320,48 @@ export default function App() {
 
         .experience-item {
           display: grid;
-          grid-template-columns: 190px minmax(0, 1fr);
-          gap: 58px;
-          padding: 42px 0;
+          grid-template-columns: 190px minmax(0,1fr);
+          gap: 55px;
+          padding: 41px 0;
           border-bottom: 1px solid var(--line);
         }
 
         .experience-period {
-          color: var(--accent);
-          font: 11px "Space Mono", monospace;
-          letter-spacing: .04em;
+          color: var(--gold);
+          font: 10px "DM Mono", monospace;
         }
 
         .experience-type {
           margin-top: 8px;
-          color: var(--muted-2);
-          font: 9px "Space Mono", monospace;
+          color: var(--dim);
+          font: 8px "DM Mono", monospace;
           letter-spacing: .05em;
           text-transform: uppercase;
         }
 
         .experience-company {
           margin: 0;
-          font: 700 26px Manrope, sans-serif;
-          letter-spacing: -.025em;
+          font-size: 25px;
+          letter-spacing: -.035em;
         }
 
         .experience-role {
           margin: 6px 0 17px;
-          color: var(--accent-strong);
-          font: 12px "Space Mono", monospace;
+          color: var(--gold-light);
+          font: 10px "DM Mono", monospace;
         }
 
         .experience-description {
           max-width: 800px;
           margin: 0;
           color: var(--muted);
-          font-size: 15px;
-          line-height: 1.78;
-        }
-
-        .experience-bullets {
-          display: grid;
-          gap: 9px;
-          max-width: 800px;
-          margin: 20px 0 0;
-          padding: 0;
-          list-style: none;
-        }
-
-        .experience-bullets li {
-          position: relative;
-          padding-left: 17px;
-          color: var(--text-soft);
           font-size: 13px;
-          line-height: 1.6;
+          line-height: 1.8;
         }
 
-        .experience-bullets li::before {
-          content: "—";
-          position: absolute;
-          left: 0;
-          color: var(--accent);
-        }
-
-        /* PROJECTS */
+        /* ================================================
+           PROJECTS
+        ================================================ */
 
         .project-list {
           border-top: 1px solid var(--line);
@@ -1340,82 +2369,122 @@ export default function App() {
 
         .project-row {
           display: grid;
-          grid-template-columns: 170px minmax(0, 1fr) auto;
-          align-items: start;
-          gap: 34px;
-          padding: 31px 0;
+          grid-template-columns: 165px minmax(0,1fr) 250px;
+          gap: 32px;
+          align-items: center;
+          padding: 26px 0;
           border-bottom: 1px solid var(--line);
+          transition:
+            padding .3s ease;
+        }
+
+        .project-row:hover {
+          padding-left: 8px;
         }
 
         .project-category {
-          padding-top: 5px;
-          color: var(--accent);
-          font: 10px "Space Mono", monospace;
+          color: var(--gold);
+          font: 9px "DM Mono", monospace;
           letter-spacing: .08em;
+        }
+
+        .project-main {
+          display: grid;
+          grid-template-columns: 1fr;
         }
 
         .project-row h3 {
           margin: 0;
-          font: 700 21px Manrope, sans-serif;
+          font-size: 19px;
+          letter-spacing: -.03em;
         }
 
         .project-row p {
-          max-width: 760px;
-          margin: 9px 0 0;
+          max-width: 700px;
+          margin: 7px 0 0;
           color: var(--muted);
-          font-size: 14px;
-          line-height: 1.68;
+          font-size: 12px;
+          line-height: 1.7;
         }
 
-        .project-row-actions {
-          display: flex;
+        .project-image {
+          width: 100%;
+          height: 75px;
+          min-height: 0;
+        }
+
+        .project-image img {
+          min-height: 75px;
+        }
+
+        .project-image .image-fallback {
+          flex-direction: row;
           gap: 8px;
-          flex-wrap: wrap;
+        }
+
+        .project-image .image-fallback small {
+          margin: 0;
+        }
+
+        .project-actions {
+          display: flex;
           justify-content: flex-end;
+          gap: 7px;
         }
 
         .mini-button {
-          min-height: 34px;
+          min-height: 32px;
           display: inline-flex;
           align-items: center;
           gap: 6px;
-          padding: 0 10px;
+          padding: 0 9px;
+
           border: 1px solid var(--line);
           color: var(--muted);
-          font: 10px "Space Mono", monospace;
-          transition: .2s ease;
+
+          font: 9px "DM Mono", monospace;
+
+          transition:
+            color .25s ease,
+            border-color .25s ease,
+            transform .25s ease;
         }
 
         .mini-button:hover {
-          border-color: var(--accent);
-          color: var(--accent-strong);
+          color: var(--gold-light);
+          border-color: var(--gold);
+          transform: translateY(-1px);
         }
 
         .mini-button svg {
-          width: 12px;
-          height: 12px;
+          width: 11px;
+          height: 11px;
         }
 
-        /* ABOUT / CREDENTIALS */
+        /* ================================================
+           ABOUT
+        ================================================ */
 
         .about-grid {
           display: grid;
-          grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
+          grid-template-columns: .9fr 1.1fr;
           gap: 80px;
         }
 
         .about-title {
           margin: 0;
-          font: 700 clamp(34px, 4.5vw, 58px)/1.02 Manrope, sans-serif;
-          letter-spacing: -.05em;
+          font-size: clamp(35px, 4.7vw, 58px);
+          line-height: 1;
+          font-weight: 700;
+          letter-spacing: -.055em;
         }
 
         .about-text {
-          max-width: 690px;
-          margin: 23px 0 0;
+          max-width: 680px;
+          margin: 21px 0 0;
           color: var(--muted);
-          font-size: 15px;
-          line-height: 1.8;
+          font-size: 13px;
+          line-height: 1.85;
         }
 
         .toolkit {
@@ -1423,21 +2492,21 @@ export default function App() {
         }
 
         .tool-row {
-          padding: 19px 0;
+          padding: 17px 0;
           border-bottom: 1px solid var(--line);
         }
 
         .tool-label {
-          margin-bottom: 8px;
-          color: var(--accent);
-          font: 700 10px "Space Mono", monospace;
+          margin-bottom: 7px;
+          color: var(--gold);
+          font: 500 9px "DM Mono", monospace;
           letter-spacing: .1em;
           text-transform: uppercase;
         }
 
         .tool-value {
-          color: var(--text-soft);
-          font-size: 14px;
+          color: var(--soft);
+          font-size: 12px;
           line-height: 1.65;
         }
 
@@ -1451,75 +2520,128 @@ export default function App() {
         }
 
         .credential {
-          height: 100%;
-          padding: 30px;
+          padding: 29px;
           background: var(--bg);
+          transition: background .3s ease;
+        }
+
+        .credential:hover {
+          background: var(--panel);
         }
 
         .credential-label {
-          color: var(--accent);
-          font: 700 10px "Space Mono", monospace;
+          color: var(--gold);
+          font: 500 9px "DM Mono", monospace;
           letter-spacing: .1em;
           text-transform: uppercase;
         }
 
         .credential h3 {
-          margin: 24px 0 8px;
-          font: 700 20px Manrope, sans-serif;
+          margin: 22px 0 7px;
+          font-size: 18px;
         }
 
         .credential p {
           margin: 0;
           color: var(--muted);
-          font-size: 14px;
-          line-height: 1.65;
+          font-size: 12px;
+          line-height: 1.7;
         }
 
-        /* CONTACT */
+        /* ================================================
+           CONTACT
+        ================================================ */
 
         .contact {
           position: relative;
           overflow: hidden;
-          padding: 125px 0;
+          padding: 135px 0;
           border-top: 1px solid var(--line);
+
           background:
-            radial-gradient(circle at 82% 45%, rgba(200,155,92,.085), transparent 27rem),
-            var(--bg-2);
+            radial-gradient(
+              circle at 80% 45%,
+              rgba(196,154,97,.075),
+              transparent 30rem
+            ),
+            var(--bg-soft);
+        }
+
+        .contact::before {
+          content: "";
+          position: absolute;
+          width: 700px;
+          height: 700px;
+          right: -400px;
+          top: -300px;
+          border-radius: 50%;
+          border: 1px solid rgba(196,154,97,.06);
+          box-shadow:
+            0 0 0 80px rgba(196,154,97,.008),
+            0 0 0 160px rgba(196,154,97,.005);
+          animation: contactOrbit 16s linear infinite;
+        }
+
+        @keyframes contactOrbit {
+          from {
+            transform: rotate(0deg);
+          }
+          to {
+            transform: rotate(360deg);
+          }
         }
 
         .contact h2 {
+          position: relative;
+          z-index: 2;
+
           max-width: 900px;
           margin: 0;
-          font: 800 clamp(46px, 7vw, 86px)/.94 Manrope, sans-serif;
-          letter-spacing: -.065em;
+
+          font-size: clamp(47px, 7vw, 88px);
+          line-height: .93;
+          font-weight: 800;
+          letter-spacing: -.07em;
         }
 
         .contact h2 em {
-          color: var(--accent);
+          color: var(--gold);
           font-style: normal;
         }
 
         .contact-copy {
+          position: relative;
+          z-index: 2;
+
           max-width: 620px;
-          margin: 25px 0 31px;
+          margin: 25px 0 30px;
+
           color: var(--muted);
-          font-size: 16px;
-          line-height: 1.75;
+          font-size: 14px;
+          line-height: 1.8;
         }
 
         .contact-links {
+          position: relative;
+          z-index: 2;
+
           display: flex;
           flex-wrap: wrap;
-          gap: 10px;
+          gap: 9px;
         }
 
         .availability {
+          position: relative;
+          z-index: 2;
+
           display: inline-flex;
           align-items: center;
           gap: 8px;
-          margin-top: 26px;
+
+          margin-top: 25px;
+
           color: var(--muted);
-          font: 10px "Space Mono", monospace;
+          font: 9px "DM Mono", monospace;
         }
 
         .availability::before {
@@ -1527,24 +2649,36 @@ export default function App() {
           width: 7px;
           height: 7px;
           border-radius: 50%;
-          background: var(--success);
-          box-shadow: 0 0 0 4px rgba(169,201,158,.08);
+          background: var(--green);
+          box-shadow:
+            0 0 0 4px rgba(168,201,154,.07);
+          animation: statusPulse 2.5s ease-in-out infinite;
         }
 
-        /* FOOTER */
+        @keyframes statusPulse {
+          0%, 100% {
+            box-shadow: 0 0 0 4px rgba(168,201,154,.07);
+          }
+          50% {
+            box-shadow: 0 0 0 7px rgba(168,201,154,.025);
+          }
+        }
+
+        /* ================================================
+           FOOTER
+        ================================================ */
 
         footer {
+          padding: 26px 0;
           border-top: 1px solid var(--line);
-          padding: 27px 0;
         }
 
         .footer-inner {
           display: flex;
           justify-content: space-between;
-          gap: 24px;
-          color: var(--muted-2);
-          font: 10px "Space Mono", monospace;
-          letter-spacing: .04em;
+          gap: 20px;
+          color: var(--dim);
+          font: 9px "DM Mono", monospace;
         }
 
         .footer-links {
@@ -1552,192 +2686,334 @@ export default function App() {
           gap: 18px;
         }
 
-        .footer-links a:hover { color: var(--accent); }
-
-        /* REVEAL */
-
-        .reveal {
-          opacity: 0;
-          transform: translateY(16px);
-          transition:
-            opacity .62s ease var(--delay),
-            transform .62s ease var(--delay);
+        .footer-links a {
+          transition: color .25s ease;
         }
 
-        .reveal.is-visible {
-          opacity: 1;
-          transform: translateY(0);
+        .footer-links a:hover {
+          color: var(--gold);
         }
 
-        @media (prefers-reduced-motion: reduce) {
-          html { scroll-behavior: auto; }
-          .reveal,
-          .reveal.is-visible {
-            opacity: 1 !important;
-            transform: none !important;
-            transition: none !important;
-          }
+        /* ================================================
+           VIDEO MODAL
+        ================================================ */
 
-          *,
-          *::before,
-          *::after {
-            animation: none !important;
-            transition-duration: .01ms !important;
-            scroll-behavior: auto !important;
+        .video-modal {
+          position: fixed;
+          z-index: 500;
+          inset: 0;
+
+          display: grid;
+          place-items: center;
+
+          padding: 25px;
+
+          background: rgba(4,4,3,.88);
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+
+          animation: modalIn .25s ease;
+        }
+
+        @keyframes modalIn {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
           }
         }
 
-        /* TABLET */
+        .video-modal-inner {
+          width: min(1000px, 100%);
+          position: relative;
+          border: 1px solid var(--line-strong);
+          background: var(--bg);
+          box-shadow:
+            0 30px 100px rgba(0,0,0,.55);
+        }
 
-        @media (max-width: 980px) {
-          .nav-links { gap: 17px; }
-          .nav-cta { display: none; }
+        .modal-video {
+          display: block;
+          width: 100%;
+          max-height: 75vh;
+          background: #050504;
+        }
 
-          .hero { min-height: auto; }
+        .modal-top {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 12px 15px;
+          border-bottom: 1px solid var(--line);
+        }
 
-          .hero-proof {
-            grid-template-columns: repeat(2, 1fr);
+        .modal-top span {
+          color: var(--gold);
+          font: 9px "DM Mono", monospace;
+          letter-spacing: .1em;
+        }
+
+        .modal-close {
+          width: 32px;
+          height: 32px;
+          display: grid;
+          place-items: center;
+
+          border: 1px solid var(--line);
+          background: transparent;
+          color: var(--text);
+          cursor: pointer;
+        }
+
+        .modal-close:hover {
+          border-color: var(--gold);
+          color: var(--gold);
+        }
+
+        /* ================================================
+           TABLET
+        ================================================ */
+
+        @media (max-width: 1000px) {
+
+          .nav-links {
+            gap: 15px;
           }
 
-          .proof-stat:nth-child(2) { border-right: 0; }
-          .proof-stat:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+          .section-header {
+            grid-template-columns: 1fr;
+            gap: 20px;
+          }
 
-          .flagship-top,
-          .case-study,
-          .security-layout,
-          .about-grid {
+          .scale-top {
             grid-template-columns: 1fr;
           }
 
-          .flagship-copy {
+          .scale-copy {
             border-right: 0;
             border-bottom: 1px solid var(--line);
           }
 
-          .architecture-grid,
+          .architecture-grid {
+            grid-template-columns: 1fr 1fr;
+          }
+
           .proof-grid {
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: 1fr 1fr;
           }
 
-          .engineering-stack {
+          .security-layout {
             grid-template-columns: 1fr;
+            gap: 45px;
           }
 
-          .experience-item {
-            grid-template-columns: 150px minmax(0, 1fr);
-            gap: 30px;
+          .about-grid {
+            grid-template-columns: 1fr;
+            gap: 55px;
           }
 
           .project-row {
-            grid-template-columns: 150px minmax(0, 1fr);
+            grid-template-columns: 145px minmax(0,1fr);
           }
 
-          .project-row-actions {
+          .project-actions {
             grid-column: 2;
             justify-content: flex-start;
           }
-        }
 
-        /* MOBILE */
-
-        @media (max-width: 700px) {
-          :root { --nav-h: 64px; }
-
-          .container {
-            width: min(var(--max), calc(100% - 30px));
+          .project-image {
+            display: none;
           }
 
-          .nav-inner { min-height: var(--nav-h); }
+          .pipeline-flow {
+            grid-template-columns: repeat(4,1fr);
+          }
 
-          .nav-links { display: none; }
+          .pipeline-step:nth-child(4) {
+            border-right: 0;
+          }
+
+          .pipeline-step:nth-child(-n+4) {
+            border-bottom: 1px solid var(--line);
+          }
+        }
+
+        /* ================================================
+           MOBILE
+        ================================================ */
+
+        @media (max-width: 700px) {
+
+          :root {
+            --nav: 64px;
+          }
+
+          .container {
+            width: min(
+              var(--max),
+              calc(100% - 30px)
+            );
+          }
+
+          .nav-links {
+            display: none;
+          }
 
           .menu-button {
             display: grid;
             place-items: center;
           }
 
-          .nav-mobile {
+          .mobile-menu {
             display: grid;
-            padding: 9px 0 17px;
+            padding: 9px 0 15px;
             border-top: 1px solid var(--line);
-            background: rgba(11,10,9,.97);
+            background: rgba(9,9,8,.97);
+            animation: mobileMenuIn .2s ease;
           }
 
-          .nav-mobile a {
+          @keyframes mobileMenuIn {
+            from {
+              opacity: 0;
+              transform: translateY(-8px);
+            }
+            to {
+              opacity: 1;
+              transform: translateY(0);
+            }
+          }
+
+          .mobile-menu a {
             padding: 13px 0;
+            border-bottom: 1px solid rgba(196,154,97,.07);
             color: var(--muted);
-            font: 11px "Space Mono", monospace;
-            letter-spacing: .07em;
-            border-bottom: 1px solid rgba(200,155,92,.08);
+            font: 10px "DM Mono", monospace;
+            letter-spacing: .06em;
+            text-transform: uppercase;
           }
 
-          .nav-mobile a:last-child { border-bottom: 0; }
+          .mobile-menu a:last-child {
+            border-bottom: 0;
+          }
+
+          .hero {
+            min-height: auto;
+            padding: 125px 0 70px;
+          }
+
+          .hero h1 {
+            font-size: clamp(
+              46px,
+              13vw,
+              70px
+            );
+          }
+
+          .hero-subtitle {
+            font-size: 15px;
+          }
+
+          .hero-proof {
+            grid-template-columns: 1fr 1fr;
+            margin-top: 50px;
+          }
+
+          .proof-stat:nth-child(2) {
+            border-right: 0;
+          }
+
+          .proof-stat:nth-child(-n+2) {
+            border-bottom: 1px solid var(--line);
+          }
+
+          .proof-stat {
+            min-height: 88px;
+            padding: 15px;
+          }
+
+          .proof-stat strong {
+            font-size: 17px;
+          }
+
+          .hero-actions .button {
+            flex: 1 1 calc(50% - 8px);
+          }
 
           .section {
             padding: 82px 0;
           }
 
-          .section-header {
-            grid-template-columns: 1fr;
-            gap: 18px;
-            margin-bottom: 38px;
+          .section-title {
+            font-size: clamp(35px, 11vw, 53px);
           }
 
-          .hero {
-            padding: 125px 0 68px;
+          .scale-copy {
+            padding: 29px 20px;
           }
 
-          .hero h1 {
-            font-size: clamp(45px, 13vw, 70px);
+          .scale-name {
+            font-size: clamp(
+              58px,
+              20vw,
+              84px
+            );
           }
 
-          .hero-subtitle {
-            font-size: 16px;
+          .scale-summary {
+            font-size: 14px;
           }
 
-          .hero-actions .button {
-            flex: 1 1 calc(50% - 10px);
-          }
-
-          .hero-proof {
-            grid-template-columns: 1fr 1fr;
-            margin-top: 48px;
-          }
-
-          .proof-stat {
-            min-height: 94px;
-            padding: 17px;
-          }
-
-          .proof-stat strong {
-            font-size: 18px;
-          }
-
-          .flagship-copy {
-            padding: 28px 20px;
-          }
-
-          .flagship h3 {
-            font-size: clamp(56px, 20vw, 84px);
-          }
-
-          .flagship-summary {
-            font-size: 15px;
-          }
-
-          .flagship-metrics {
+          .scale-metrics {
             grid-template-columns: 1fr 1fr;
           }
 
           .metric {
-            min-height: 140px;
-            padding: 22px 18px;
+            min-height: 135px;
+            padding: 20px 17px;
           }
 
-          .metric:nth-child(2) { border-right: 0; }
-          .metric:nth-child(3) { border-right: 1px solid var(--line); }
-          .metric:nth-child(3),
-          .metric:nth-child(4) { border-bottom: 0; }
+          .metric-value {
+            font-size: 25px;
+          }
+
+          .scale-media {
+            grid-template-columns: 1fr;
+          }
+
+          .image-gallery,
+          .video-panel {
+            aspect-ratio: 16 / 9;
+          }
+
+          .gallery-arrow {
+            opacity: 1;
+          }
+
+          .gallery-overlay {
+            min-height: 50px;
+            padding: 11px 12px;
+          }
+
+          .gallery-dots {
+            display: none;
+          }
+
+          .image-modal {
+            padding: 10px;
+          }
+
+          .image-modal-stage {
+            min-height: 60vh;
+            padding: 10px;
+          }
+
+          .image-modal-stage img {
+            max-height: 60vh;
+          }
+
+          .modal-media-prev { left: 8px; }
+          .modal-media-next { right: 8px; }
 
           .pipeline-flow {
             grid-template-columns: 1fr;
@@ -1745,71 +3021,83 @@ export default function App() {
 
           .pipeline-step {
             min-height: auto;
-            border-right: 0;
+            border-right: 0 !important;
             border-bottom: 1px solid var(--line);
           }
 
-          .pipeline-step:last-child { border-bottom: 0; }
+          .pipeline-step:last-child {
+            border-bottom: 0;
+          }
 
           .pipeline-step:not(:last-child)::after {
             content: "↓";
-            top: auto;
             right: auto;
             left: 50%;
-            bottom: -8px;
+            top: auto;
+            bottom: -7px;
             transform: translateX(-50%);
           }
 
           .architecture-grid,
           .proof-grid,
-          .engineering-stack,
-          .credentials,
-          .security-grid {
+          .skills-grid {
             grid-template-columns: 1fr;
           }
 
           .architecture-card {
-            min-height: 230px;
+            min-height: 225px;
           }
 
           .architecture-card h3 {
-            margin-top: 48px;
+            margin-top: 45px;
           }
 
           .security-grid {
-            gap: 1px;
-          }
-
-          .security-item {
-            font-size: 10px;
+            grid-template-columns: 1fr;
           }
 
           .experience-item {
             grid-template-columns: 1fr;
-            gap: 10px;
-            padding: 34px 0;
+            gap: 11px;
+            padding: 32px 0;
+          }
+
+          .experience-company {
+            font-size: 23px;
           }
 
           .project-row {
             grid-template-columns: 1fr;
             gap: 12px;
-            padding: 26px 0;
+            padding: 25px 0;
           }
 
-          .project-row-actions {
+          .project-actions {
             grid-column: auto;
           }
 
           .about-grid {
-            gap: 50px;
+            gap: 48px;
+          }
+
+          .credentials {
+            grid-template-columns: 1fr;
           }
 
           .contact {
-            padding: 90px 0;
+            padding: 92px 0;
           }
 
           .contact h2 {
-            font-size: clamp(45px, 14vw, 68px);
+            font-size: clamp(
+              45px,
+              14vw,
+              70px
+            );
+          }
+
+          .contact-links .button {
+            flex: 1 1 calc(50% - 8px);
           }
 
           .footer-inner {
@@ -1818,8 +3106,10 @@ export default function App() {
           }
         }
 
-        @media (max-width: 420px) {
-          .hero-actions .button {
+        @media (max-width: 430px) {
+
+          .hero-actions .button,
+          .contact-links .button {
             flex-basis: 100%;
           }
 
@@ -1828,7 +3118,7 @@ export default function App() {
           }
 
           .proof-stat,
-          .proof-stat:nth-child(-n+2) {
+          .proof-stat:nth-child(2) {
             border-right: 0;
             border-bottom: 1px solid var(--line);
           }
@@ -1837,12 +3127,12 @@ export default function App() {
             border-bottom: 0;
           }
 
-          .flagship-metrics {
+          .scale-metrics {
             grid-template-columns: 1fr;
           }
 
           .metric,
-          .metric:nth-child(3) {
+          .metric:nth-child(2n) {
             border-right: 0;
             border-bottom: 1px solid var(--line);
           }
@@ -1850,250 +3140,534 @@ export default function App() {
           .metric:last-child {
             border-bottom: 0;
           }
+
+          .pipeline-header {
+            flex-direction: column;
+            gap: 7px;
+          }
         }
+
+        /* ================================================
+           REDUCED MOTION
+        ================================================ */
+
+        @media (prefers-reduced-motion: reduce) {
+
+          html {
+            scroll-behavior: auto;
+          }
+
+          *,
+          *::before,
+          *::after {
+            animation: none !important;
+            transition-duration: .01ms !important;
+          }
+
+          .reveal,
+          .reveal.visible {
+            opacity: 1 !important;
+            transform: none !important;
+            transition: none !important;
+          }
+        }
+
       `}</style>
 
       <div className="site" id="top">
+
+        {/* =====================================================
+            NAV
+        ===================================================== */}
+
         <header className="nav">
+
           <div className="container nav-inner">
-            <a className="brand" href="#top" onClick={closeMenu} aria-label="Back to top">
+
+            <a
+              className="brand"
+              href="#top"
+              onClick={closeMenu}
+              aria-label="Back to top"
+            >
               <span className="brand-mark">MG</span>
               <span>{PROFILE.name}</span>
             </a>
 
-            <nav className="nav-links" aria-label="Primary navigation">
-              {navItems.map(([id, label]) => (
-                <a key={id} href={`#${id}`}>
+            <nav
+              className="nav-links"
+              aria-label="Primary navigation"
+            >
+              {nav.map(([id, label]) => (
+                <a
+                  key={id}
+                  href={`#${id}`}
+                  className={
+                    activeSection === id
+                      ? "active"
+                      : ""
+                  }
+                >
                   {label}
                 </a>
               ))}
-              <a className="nav-cta" href={PROFILE.resume} target="_blank" rel="noopener noreferrer">
-                RESUME
+
+              <a
+                className="nav-resume"
+                href={PROFILE.resume}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Resume
               </a>
             </nav>
 
             <button
               className="menu-button"
               type="button"
-              aria-label={menuOpen ? "Close navigation" : "Open navigation"}
+              onClick={() =>
+                setMenuOpen((value) => !value)
+              }
               aria-expanded={menuOpen}
-              aria-controls="mobile-navigation"
-              onClick={() => setMenuOpen((value) => !value)}
+              aria-label={
+                menuOpen
+                  ? "Close navigation"
+                  : "Open navigation"
+              }
             >
               {menuOpen ? "×" : "☰"}
             </button>
+
           </div>
 
           {menuOpen && (
-            <nav id="mobile-navigation" className="container nav-mobile" aria-label="Mobile navigation">
-              {navItems.map(([id, label]) => (
-                <a key={id} href={`#${id}`} onClick={closeMenu}>
+            <nav
+              className="container mobile-menu"
+              aria-label="Mobile navigation"
+            >
+              {nav.map(([id, label]) => (
+                <a
+                  key={id}
+                  href={`#${id}`}
+                  onClick={closeMenu}
+                >
                   {label}
                 </a>
               ))}
-              <a href={PROFILE.resume} target="_blank" rel="noopener noreferrer" onClick={closeMenu}>
+
+              <a
+                href={PROFILE.resume}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={closeMenu}
+              >
                 Resume
               </a>
             </nav>
           )}
+
         </header>
 
         <main>
-          {/* ============================================================
+
+          {/* =====================================================
               HERO
-          ============================================================ */}
-          <section className="hero" aria-labelledby="hero-title">
-            <div className="hero-grid" aria-hidden="true" />
+          ===================================================== */}
+
+          <section
+            className="hero"
+            aria-labelledby="hero-title"
+          >
+
+            <div className="hero-grid" />
+            <div className="hero-glow" />
 
             <div className="container">
+
               <div className="hero-content">
+
                 <Reveal>
-                  <div className="hero-kicker">
-                    {PROFILE.title} · {PROFILE.positioning}
+
+                  <div className="hero-top-row">
+                    <button 
+                      className="hero-avatar" 
+                      onClick={() => setAvatarOpen(true)}
+                      aria-label="View profile picture"
+                    >
+                      <div className="avatar-ring">
+                        {!avatarFailed ? (
+                          <img 
+                            src="./images/profile.png" 
+                            alt="Mostafa Goda" 
+                            onError={() => setAvatarFailed(true)}
+                          />
+                        ) : (
+                          <div className="avatar-fallback">MG</div>
+                        )}
+                      </div>
+                    </button>
+                    
+                    <div className="hero-kicker">
+                      {PROFILE.title} ·{" "}
+                      {PROFILE.positioning}
+                    </div>
                   </div>
 
                   <h1 id="hero-title">
-                    I build <em>backend systems</em> and secure software platforms.
+                    I build{" "}
+                    <em>backend systems</em>{" "}
+                    and secure software platforms.
                   </h1>
 
                   <p className="hero-subtitle">
-                    {PROFILE.professionalNote !== "[FILL — one short sentence about the kinds of engineering teams/problems you want to work on.]"
-                      ? PROFILE.professionalNote
-                      : (
-                        <>
-                          Software engineer focused on <strong>backend architecture,
-                          secure execution and infrastructure</strong>, with the
-                          ability to work across the stack when the system requires it.
-                        </>
-                      )}
+                    Software engineer focused on{" "}
+                    <strong>
+                      backend architecture, secure
+                      execution and infrastructure
+                    </strong>
+                    , with the ability to work across
+                    the stack when the system requires it.
                   </p>
 
                   <div className="hero-actions">
-                    <a className="button button-primary" href="#scale">
+
+                    <Button
+                      href="#work"
+                      primary
+                    >
                       View flagship system
                       <ArrowIcon />
-                    </a>
+                    </Button>
 
-                    <a className="button" href={`tel:${PROFILE.phone.replace(/\s+/g, '')}`}>
+                    <Button
+                      href={`tel:${PROFILE.phone}`}
+                    >
                       <PhoneIcon />
                       {PROFILE.phone}
-                    </a>
+                    </Button>
 
-                    <a
-                      className="button"
+                    <Button
                       href={PROFILE.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      external
                     >
                       <GithubIcon />
                       GitHub
-                    </a>
+                    </Button>
 
-                    <a
-                      className="button"
+                    <Button
                       href={PROFILE.resume}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      external
                     >
                       <DownloadIcon />
                       Resume
-                    </a>
+                    </Button>
+
                   </div>
 
-                  <div className="hero-proof" aria-label="Selected engineering evidence">
+                  <div
+                    className="hero-proof"
+                    aria-label="Selected engineering evidence"
+                  >
+
                     <div className="proof-stat">
                       <strong>2026</strong>
-                      <span>Computer Science graduate</span>
+                      <span>
+                        Computer Science graduate
+                      </span>
                     </div>
+
                     <div className="proof-stat">
                       <strong>5+ yrs</strong>
-                      <span>Real-world business & operations</span>
+                      <span>
+                        Real-world business &
+                        operations
+                      </span>
                     </div>
+
                     <div className="proof-stat">
                       <strong>10</strong>
-                      <span>Sandboxed security labs in SCALE</span>
+                      <span>
+                        Sandboxed security labs
+                      </span>
                     </div>
+
                     <div className="proof-stat">
                       <strong>128</strong>
-                      <span>Documented SCALE API routes</span>
+                      <span>
+                        Documented SCALE API routes
+                      </span>
                     </div>
+
                   </div>
+
                 </Reveal>
+
               </div>
+
             </div>
+
           </section>
 
-          {/* ============================================================
-              WORK / SCALE
-          ============================================================ */}
-          <section className="section" id="work" aria-labelledby="work-title">
+          {/* =====================================================
+              WORK
+          ===================================================== */}
+
+          <section
+            className="section"
+            id="work"
+            aria-labelledby="work-title"
+          >
+
             <div className="container">
+
               <Reveal>
+
                 <div className="section-header">
+
                   <div>
-                    <p className="eyebrow">SELECTED WORK</p>
-                    <h2 className="section-title" id="work-title">
+                    <p className="eyebrow">
+                      SELECTED WORK
+                    </p>
+
+                    <h2
+                      className="section-title"
+                      id="work-title"
+                    >
                       One flagship system.
                       <br />
                       Real engineering depth.
                     </h2>
                   </div>
+
                   <p className="section-intro">
-                    I am intentionally keeping the portfolio focused. SCALE is the
-                    strongest evidence of my systems, backend and security work;
-                    secondary projects are presented as supporting evidence rather
-                    than competing for attention.
+                    SCALE is the strongest evidence
+                    of my systems, backend and security
+                    work. The portfolio keeps it at the
+                    center rather than burying it under
+                    a long project list.
                   </p>
+
                 </div>
+
               </Reveal>
 
               <Reveal>
-                <article className="flagship" id="scale">
-                  <div className="flagship-top">
-                    <div className="flagship-copy">
-                      <div className="flagship-label">Flagship engineering case study</div>
-                      <h3>{FLAGSHIP.name}</h3>
-                      <div className="flagship-fullname">{FLAGSHIP.fullName}</div>
 
-                      <p className="flagship-summary">{FLAGSHIP.summary}</p>
+                <article className="scale-card">
 
-                      <div className="flagship-actions">
-                        <OptionalLink href={FLAGSHIP.repo} primary>
+                  <div className="scale-top">
+
+                    <div className="scale-copy">
+
+                      <div className="scale-label">
+                        Flagship engineering case study
+                      </div>
+
+                      <h3 className="scale-name">
+                        {SCALE.name}
+                      </h3>
+
+                      <div className="scale-fullname">
+                        {SCALE.fullName}
+                      </div>
+
+                      <p className="scale-summary">
+                        {SCALE.summary}
+                      </p>
+
+                      <div className="scale-actions">
+
+                        <Button
+                          href={SCALE.repo}
+                          primary
+                          external
+                        >
                           Source code
-                        </OptionalLink>
-                        <OptionalLink href={FLAGSHIP.demo}>
-                          Live demo
-                        </OptionalLink>
-                        <a className="button" href="#architecture">
+                          <ExternalIcon />
+                        </Button>
+
+                        <Button href="#architecture">
                           Architecture
                           <ArrowIcon />
-                        </a>
+                        </Button>
+
+                        <Button
+                          onClick={() =>
+                            setVideoOpen(true)
+                          }
+                        >
+                          Watch preview
+                          <PlayIcon />
+                        </Button>
+
                       </div>
 
-                      <div className="tag-list" aria-label="SCALE technology stack">
-                        {FLAGSHIP.stack.map((item) => (
-                          <span className="tag" key={item}>{item}</span>
+                      <div
+                        className="tag-list"
+                        aria-label="SCALE technology stack"
+                      >
+                        {SCALE.stack.map((item) => (
+                          <span
+                            className="tag"
+                            key={item}
+                          >
+                            {item}
+                          </span>
                         ))}
                       </div>
+
                     </div>
 
-                    <div className="flagship-metrics">
-                      {FLAGSHIP.metrics.map((metric) => (
-                        <div className="metric" key={metric.label}>
-                          <div className="metric-value">{metric.value}</div>
-                          <div className="metric-label">{metric.label}</div>
-                        </div>
-                      ))}
+                    <div className="scale-metrics">
+
+                      {SCALE.metrics.map(
+                        ([value, label]) => (
+                          <div
+                            className="metric"
+                            key={label}
+                          >
+                            <div className="metric-value">
+                              {value}
+                            </div>
+
+                            <div className="metric-label">
+                              {label}
+                            </div>
+                          </div>
+                        )
+                      )}
+
                     </div>
+
                   </div>
+
                 </article>
+
               </Reveal>
 
-              <Reveal delay={80}>
+              {/* MEDIA */}
+
+              <Reveal delay={90}>
+
+                <div className="scale-media">
+
+                  <ImageGallery
+                    onOpen={(index) => {
+                      setImageIndex(index);
+                      setImageOpen(true);
+                    }}
+                  />
+
+                  <VideoPanel
+                    onOpen={() =>
+                      setVideoOpen(true)
+                    }
+                  />
+
+                </div>
+
+              </Reveal>
+
+              {/* CASE STUDY */}
+
+              <Reveal delay={100}>
+
                 <div className="case-study">
+
                   <div className="case-copy">
-                    <p className="eyebrow">ENGINEERING CASE STUDY</p>
-                    <h3>Problem → boundary → implementation.</h3>
-                    <p>
-                      SCALE was engineered as a complete platform rather than a collection
-                      of isolated features. Its core challenge was safely executing and
-                      validating untrusted learner code while keeping the application,
-                      persistence and user sessions isolated from execution failures.
+
+                    <p className="eyebrow">
+                      ENGINEERING CASE STUDY
                     </p>
+
+                    <h3>
+                      Problem → boundary →
+                      implementation.
+                    </h3>
+
+                    <p>
+                      SCALE was engineered as a
+                      complete platform rather than a
+                      collection of isolated features.
+                      Its central challenge was safely
+                      executing and validating untrusted
+                      learner code while keeping the
+                      application, persistence and user
+                      sessions isolated from execution
+                      failures.
+                    </p>
+
                   </div>
 
                   <div>
-                    <div className="case-block">
-                      <div className="case-label">01 · Problem</div>
-                      <p>{FLAGSHIP.problem}</p>
-                    </div>
 
                     <div className="case-block">
-                      <div className="case-label">02 · Solution</div>
-                      <p>{FLAGSHIP.solution}</p>
-                    </div>
 
-                    <div className="case-block">
-                      <div className="case-label">03 · Engineering result</div>
+                      <div className="case-label">
+                        01 · Problem
+                      </div>
+
                       <p>
-                        The implementation satisfied all 32 functional and 16 non-functional
-                        requirements verified in the evaluation chapter. User evaluation
-                        scores ranged from 4.1 to 4.5 out of 5, while the system was prepared
-                        as a containerised deployment that can be started with Docker Compose.
+                        {SCALE.problem}
                       </p>
+
                     </div>
+
+                    <div className="case-block">
+
+                      <div className="case-label">
+                        02 · Solution
+                      </div>
+
+                      <p>
+                        {SCALE.solution}
+                      </p>
+
+                    </div>
+
+                    <div className="case-block">
+
+                      <div className="case-label">
+                        03 · Engineering result
+                      </div>
+
+                      <p>
+                        The implementation satisfied
+                        all 32 functional and 16
+                        non-functional requirements
+                        verified during evaluation.
+                        User evaluation scores ranged
+                        from 4.1 to 4.5 out of 5.
+                      </p>
+
+                    </div>
+
                   </div>
+
                 </div>
+
               </Reveal>
 
-              <Reveal delay={120}>
+              {/* PIPELINE */}
+
+              <Reveal delay={130}>
+
                 <div className="pipeline">
+
                   <div className="pipeline-header">
-                    <span className="pipeline-title">CORE EXECUTION PIPELINE</span>
-                    <span className="pipeline-note">UNTRUSTED CODE → VALIDATED RESULT</span>
+
+                    <span className="pipeline-title">
+                      CORE EXECUTION PIPELINE
+                    </span>
+
+                    <span className="pipeline-note">
+                      UNTRUSTED CODE → VALIDATED RESULT
+                    </span>
+
                   </div>
 
                   <div className="pipeline-flow">
+
                     {[
                       ["01", "Submit", "Learner code"],
                       ["02", "Validate", "API + auth"],
@@ -2102,301 +3676,602 @@ export default function App() {
                       ["05", "Collect", "Execution logs"],
                       ["06", "Analyze", "Backend result"],
                       ["07", "Respond", "Score + feedback"],
-                    ].map(([n, title, text]) => (
-                      <div className="pipeline-step" key={n}>
-                        <small>{n}</small>
-                        <strong>{title}</strong>
-                        <span>{text}</span>
-                      </div>
-                    ))}
+                    ].map(
+                      ([number, title, text]) => (
+                        <div
+                          className="pipeline-step"
+                          key={number}
+                        >
+                          <small>{number}</small>
+                          <strong>{title}</strong>
+                          <span>{text}</span>
+                        </div>
+                      )
+                    )}
+
                   </div>
+
                 </div>
+
               </Reveal>
+
             </div>
+
           </section>
 
-          {/* ============================================================
+          {/* =====================================================
               ARCHITECTURE
-          ============================================================ */}
-          <section className="section" id="architecture" aria-labelledby="architecture-title">
+          ===================================================== */}
+
+          <section
+            className="section"
+            id="architecture"
+            aria-labelledby="architecture-title"
+          >
+
             <div className="container">
+
               <Reveal>
+
                 <div className="section-header">
+
                   <div>
-                    <p className="eyebrow">SYSTEM DESIGN</p>
-                    <h2 className="section-title" id="architecture-title">
+
+                    <p className="eyebrow">
+                      SYSTEM DESIGN
+                    </p>
+
+                    <h2
+                      className="section-title"
+                      id="architecture-title"
+                    >
                       Architecture is a
                       <br />
                       decision, not a diagram.
                     </h2>
+
                   </div>
+
                   <p className="section-intro">
-                    The useful part of architecture is the reasoning behind the
-                    boundaries. This section exposes the decisions an engineering
-                    interviewer is likely to ask about.
+                    The useful part of architecture is
+                    the reasoning behind the boundaries.
+                    This section exposes the decisions an
+                    engineering interviewer is likely to
+                    ask about.
                   </p>
+
                 </div>
+
               </Reveal>
 
               <div className="architecture-grid">
-                {FLAGSHIP.architecture.map((item, index) => (
-                  <Reveal key={item.n} delay={index * 55}>
-                    <article className="architecture-card">
-                      <span className="architecture-number">{item.n}</span>
-                      <h3>{item.title}</h3>
-                      <p>{item.text}</p>
-                    </article>
-                  </Reveal>
-                ))}
+
+                {SCALE.architecture.map(
+                  (item, index) => (
+                    <Reveal
+                      key={item.number}
+                      delay={index * 60}
+                    >
+                      <article className="architecture-card">
+
+                        <span className="architecture-number">
+                          {item.number}
+                        </span>
+
+                        <h3>{item.title}</h3>
+
+                        <p>{item.text}</p>
+
+                      </article>
+                    </Reveal>
+                  )
+                )}
+
               </div>
 
               <Reveal delay={100}>
-                <div className="decision-list" aria-label="Architecture decisions">
-                  {FLAGSHIP.decisions.map((decision, index) => {
-                    const open = decisionOpen === index;
 
-                    return (
-                      <div className="decision" key={decision.title}>
-                        <button
-                          className="decision-button"
-                          type="button"
-                          aria-expanded={open}
-                          aria-controls={`decision-${index}`}
-                          onClick={() => setDecisionOpen(open ? null : index)}
-                        >
-                          <span>{decision.title}</span>
-                          <span aria-hidden="true">{open ? "−" : "+"}</span>
-                        </button>
+                <div className="decision-list">
 
+                  {SCALE.decisions.map(
+                    (decision, index) => {
+
+                      const open =
+                        decisionOpen === index;
+
+                      return (
                         <div
-                          id={`decision-${index}`}
-                          className="decision-content"
-                          hidden={!open}
+                          className="decision"
+                          key={decision.title}
                         >
-                          {decision.text}
+
+                          <button
+                            className="decision-button"
+                            type="button"
+                            aria-expanded={open}
+                            onClick={() =>
+                              setDecisionOpen(
+                                open
+                                  ? null
+                                  : index
+                              )
+                            }
+                          >
+
+                            <span>
+                              {decision.title}
+                            </span>
+
+                            <span>
+                              {open ? "−" : "+"}
+                            </span>
+
+                          </button>
+
+                          {open && (
+                            <div className="decision-content">
+                              {decision.text}
+                            </div>
+                          )}
+
                         </div>
-                      </div>
-                    );
-                  })}
+                      );
+                    }
+                  )}
+
                 </div>
+
               </Reveal>
+
             </div>
+
           </section>
 
-          {/* ============================================================
+          {/* =====================================================
               SECURITY
-          ============================================================ */}
-          <section className="section" id="security" aria-labelledby="security-title">
+          ===================================================== */}
+
+          <section
+            className="section"
+            aria-labelledby="security-title"
+          >
+
             <div className="container">
+
               <div className="security-layout">
+
                 <Reveal>
+
                   <div>
-                    <p className="eyebrow">SECURITY ENGINEERING</p>
-                    <h2 className="security-title" id="security-title">
-                      Security is part of the system boundary.
+
+                    <p className="eyebrow">
+                      SECURITY ENGINEERING
+                    </p>
+
+                    <h2
+                      className="security-title"
+                      id="security-title"
+                    >
+                      Security is part of
+                      the system boundary.
                     </h2>
+
                     <p className="security-intro">
-                      SCALE treats learner submissions as untrusted input and routes
-                      remediation through a separate execution environment rather
-                      than executing it directly inside the main application process.
+                      SCALE treats learner submissions
+                      as untrusted input and routes
+                      remediation through a separate
+                      execution environment rather than
+                      executing it directly inside the
+                      main application process.
                     </p>
 
                     <div className="security-boundary">
-                      <strong>Important boundary:</strong> Docker is not presented
-                      here as a magical perfect security boundary. The reference
-                      deployment still shares the host kernel and requires Docker
-                      access. Stronger production isolation would require additional
-                      hardening or a stronger sandbox technology.
+
+                      <strong>
+                        Important boundary:
+                      </strong>{" "}
+                      Docker is not presented here as a
+                      magical perfect security boundary.
+                      The reference deployment still
+                      shares the host kernel and requires
+                      Docker access. Stronger production
+                      isolation would require additional
+                      hardening or stronger sandbox
+                      technology.
+
                     </div>
+
                   </div>
+
                 </Reveal>
 
                 <Reveal delay={90}>
+
                   <div className="security-grid">
-                    {FLAGSHIP.controls.map((item) => (
-                      <div className="security-item" key={item}>{item}</div>
+
+                    {SCALE.controls.map((item) => (
+                      <div
+                        className="security-item"
+                        key={item}
+                      >
+                        {item}
+                      </div>
                     ))}
+
                   </div>
+
                 </Reveal>
+
               </div>
+
             </div>
+
           </section>
 
-          {/* ============================================================
-              ENGINEERING PROOF
-          ============================================================ */}
-          <section className="section" id="engineering" aria-labelledby="engineering-title">
+          {/* =====================================================
+              ENGINEERING
+          ===================================================== */}
+
+          <section
+            className="section"
+            id="engineering"
+            aria-labelledby="engineering-title"
+          >
+
             <div className="container">
+
               <Reveal>
+
                 <div className="section-header">
+
                   <div>
-                    <p className="eyebrow">ENGINEERING EVIDENCE</p>
-                    <h2 className="section-title" id="engineering-title">
+
+                    <p className="eyebrow">
+                      ENGINEERING EVIDENCE
+                    </p>
+
+                    <h2
+                      className="section-title"
+                      id="engineering-title"
+                    >
                       What I can prove,
                       <br />
                       not just what I can list.
                     </h2>
+
                   </div>
+
                   <p className="section-intro">
-                    Technologies are supporting evidence. The stronger signal is the
-                    ability to reason about architecture, failure, security and
-                    delivery.
+                    Technologies are supporting
+                    evidence. The stronger signal is the
+                    ability to reason about architecture,
+                    failure, security and delivery.
                   </p>
+
                 </div>
+
               </Reveal>
 
               <div className="proof-grid">
-                {PROOF_ITEMS.map((item, index) => (
-                  <Reveal key={item.number} delay={index * 50}>
-                    <article className="proof-card">
-                      <span className="proof-card-number">{item.number}</span>
-                      <h3>{item.title}</h3>
-                      <p>{item.text}</p>
-                    </article>
-                  </Reveal>
-                ))}
+
+                {[
+                  [
+                    "01",
+                    "Architecture decisions",
+                    "Explain why a system is shaped the way it is—not merely which frameworks were used.",
+                  ],
+                  [
+                    "02",
+                    "Security boundaries",
+                    "Model untrusted inputs and isolate high-risk execution paths rather than treating security as a final checklist.",
+                  ],
+                  [
+                    "03",
+                    "Engineering practice",
+                    "Apply structured problem decomposition, technical research, formal UML/SRS documentation and testing methodologies.",
+                  ],
+                  [
+                    "04",
+                    "Real-world ownership",
+                    "Professional responsibility outside university adds evidence of judgment, communication and operational ownership.",
+                  ],
+                ].map(
+                  ([number, title, text], index) => (
+                    <Reveal
+                      key={number}
+                      delay={index * 55}
+                    >
+                      <article className="proof-card">
+
+                        <span className="proof-number">
+                          {number}
+                        </span>
+
+                        <h3>{title}</h3>
+
+                        <p>{text}</p>
+
+                      </article>
+                    </Reveal>
+                  )
+                )}
+
               </div>
 
-              <div className="engineering-stack">
-                {ENGINEERING_AREAS.map((area, index) => (
-                  <Reveal key={area.title} delay={index * 45}>
-                    <article className="engineering-card">
-                      <h3>{area.title}</h3>
-                      <p className="engineering-lead">{area.lead}</p>
-                      <div className="evidence">
-                        {area.evidence.map((item) => (
-                          <span className="tag" key={item}>{item}</span>
+              <div className="skills-grid">
+
+                {SKILLS.map((skill, index) => (
+                  <Reveal
+                    key={skill.title}
+                    delay={index * 45}
+                  >
+
+                    <article className="skill-card">
+
+                      <h3>{skill.title}</h3>
+
+                      <p className="skill-description">
+                        {skill.description}
+                      </p>
+
+                      <div className="skill-tags">
+
+                        {skill.items.map((item) => (
+                          <span
+                            className="tag"
+                            key={item}
+                          >
+                            {item}
+                          </span>
                         ))}
+
                       </div>
+
                     </article>
+
                   </Reveal>
                 ))}
+
               </div>
+
             </div>
+
           </section>
 
-          {/* ============================================================
+          {/* =====================================================
               EXPERIENCE
-          ============================================================ */}
-          <section className="section" id="experience" aria-labelledby="experience-title">
+          ===================================================== */}
+
+          <section
+            className="section"
+            id="experience"
+            aria-labelledby="experience-title"
+          >
+
             <div className="container">
+
               <Reveal>
+
                 <div className="section-header">
+
                   <div>
-                    <p className="eyebrow">PROFESSIONAL EXPERIENCE</p>
-                    <h2 className="section-title" id="experience-title">
+
+                    <p className="eyebrow">
+                      PROFESSIONAL EXPERIENCE
+                    </p>
+
+                    <h2
+                      className="section-title"
+                      id="experience-title"
+                    >
                       Software engineer.
                       <br />
                       Real-world responsibility.
                     </h2>
+
                   </div>
+
                   <p className="section-intro">
-                    Graduation is not the end of the story. Professional responsibility,
-                    technical judgment and working with real organizations are part of
-                    the engineering profile.
+                    Graduation is not the entire story.
+                    Professional responsibility,
+                    technical judgment and working with
+                    real organizations are part of the
+                    engineering profile.
                   </p>
+
                 </div>
+
               </Reveal>
 
               <div className="experience-list">
-                {EXPERIENCE.map((item, index) => (
-                  <Reveal key={`${item.company}-${item.period}`} delay={index * 65}>
-                    <article className="experience-item">
-                      <div>
-                        <div className="experience-period">{item.period}</div>
-                        <div className="experience-type">{item.type}</div>
-                      </div>
 
-                      <div>
-                        <h3 className="experience-company">{item.company}</h3>
-                        <p className="experience-role">{item.role}</p>
-                        <p className="experience-description">{item.description}</p>
+                {EXPERIENCE.map(
+                  (item, index) => (
+                    <Reveal
+                      key={`${item.company}-${item.period}`}
+                      delay={index * 65}
+                    >
 
-                        {item.bullets.length > 0 && (
-                          <ul className="experience-bullets">
-                            {item.bullets.map((bullet) => (
-                              <li key={bullet}>{bullet}</li>
-                            ))}
-                          </ul>
-                        )}
+                      <article className="experience-item">
 
-                        <div className="tag-list">
-                          {item.tags.map((tag) => (
-                            <span className="tag" key={tag}>{tag}</span>
-                          ))}
+                        <div>
+
+                          <div className="experience-period">
+                            {item.period}
+                          </div>
+
+                          <div className="experience-type">
+                            {item.type}
+                          </div>
+
                         </div>
-                      </div>
-                    </article>
-                  </Reveal>
-                ))}
+
+                        <div>
+
+                          <h3 className="experience-company">
+                            {item.company}
+                          </h3>
+
+                          <p className="experience-role">
+                            {item.role}
+                          </p>
+
+                          <p className="experience-description">
+                            {item.description}
+                          </p>
+
+                          <div className="tag-list">
+
+                            {item.tags.map((tag) => (
+                              <span
+                                className="tag"
+                                key={tag}
+                              >
+                                {tag}
+                              </span>
+                            ))}
+
+                          </div>
+
+                        </div>
+
+                      </article>
+
+                    </Reveal>
+                  )
+                )}
+
               </div>
+
             </div>
+
           </section>
 
-          {/* ============================================================
-              ADDITIONAL PROJECTS
-          ============================================================ */}
-          <section className="section" id="projects" aria-labelledby="projects-title">
+          {/* =====================================================
+              PROJECTS
+          ===================================================== */}
+
+          <section
+            className="section"
+            id="projects"
+            aria-labelledby="projects-title"
+          >
+
             <div className="container">
+
               <Reveal>
+
                 <div className="section-header">
+
                   <div>
-                    <p className="eyebrow">ADDITIONAL ENGINEERING WORK</p>
-                    <h2 className="section-title" id="projects-title">
+
+                    <p className="eyebrow">
+                      ADDITIONAL ENGINEERING WORK
+                    </p>
+
+                    <h2
+                      className="section-title"
+                      id="projects-title"
+                    >
                       Supporting evidence,
                       <br />
                       not project inflation.
                     </h2>
+
                   </div>
+
                   <p className="section-intro">
-                    Keep only projects that you can defend technically. The goal is
-                    consistency and evidence, not a long list of university assignments.
+                    Secondary projects stay intentionally
+                    smaller. SCALE remains the primary
+                    technical story.
                   </p>
+
                 </div>
+
               </Reveal>
 
               <div className="project-list">
-                {PROJECTS.map((project, index) => (
-                  <Reveal key={project.title} delay={index * 45}>
-                    <article className="project-row">
-                      <div className="project-category">{project.category}</div>
 
-                      <div>
-                        <h3>{project.title}</h3>
-                        <p>{project.description}</p>
+                {PROJECTS.map(
+                  (project, index) => (
+                    <Reveal
+                      key={project.title}
+                      delay={index * 50}
+                    >
 
-                        {project.featured && (
-                          <div className="tag-list">
-                            <span className="tag">Featured supporting project</span>
-                          </div>
-                        )}
-                      </div>
+                      <article className="project-row">
 
-                      <div className="project-row-actions">
-                        <OptionalLink href={project.repo}>
-                          Source
-                        </OptionalLink>
-                        <OptionalLink href={project.demo}>
-                          Demo
-                        </OptionalLink>
-                      </div>
-                    </article>
-                  </Reveal>
-                ))}
+                        <div className="project-category">
+                          {project.category}
+                        </div>
+
+                        <div className="project-main">
+
+                          <h3>
+                            {project.title}
+                          </h3>
+
+                          <p>
+                            {project.description}
+                          </p>
+
+                        </div>
+
+                        <div className="project-actions">
+
+                          {project.repo && (
+                            <a
+                              className="mini-button"
+                              href={project.repo}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              Source
+                              <ExternalIcon />
+                            </a>
+                          )}
+
+                         
+                        </div>
+
+                      </article>
+
+                    </Reveal>
+                  )
+                )}
+
               </div>
+
             </div>
+
           </section>
 
-          {/* ============================================================
-              ABOUT / TOOLKIT / EDUCATION
-          ============================================================ */}
-          <section className="section" id="about" aria-labelledby="about-title">
+          {/* =====================================================
+              ABOUT
+          ===================================================== */}
+
+          <section
+            className="section"
+            id="about"
+            aria-labelledby="about-title"
+          >
+
             <div className="container">
+
               <div className="about-grid">
+
                 <Reveal>
+
                   <div>
-                    <p className="eyebrow">ABOUT</p>
-                    <h2 className="about-title" id="about-title">
+
+                    <p className="eyebrow">
+                      ABOUT
+                    </p>
+
+                    <h2
+                      className="about-title"
+                      id="about-title"
+                    >
                       Understand the problem.
                       <br />
                       Design the boundary.
@@ -2405,69 +4280,164 @@ export default function App() {
                     </h2>
 
                     <p className="about-text">
-                      I am a Software Engineer with a strong foundation in backend engineering, software architecture, cybersecurity, and full-stack development, complemented by several years of real-world experience in industrial automation, technical procurement, and operations. I have designed and built complex software systems using Python, FastAPI, Java, Spring Boot, React, TypeScript, Node.js, MySQL, Docker, and related technologies.
+                      I am a Software Engineer with a
+                      strong foundation in backend
+                      engineering, software architecture,
+                      cybersecurity and full-stack
+                      development, complemented by
+                      several years of real-world
+                      experience in industrial automation,
+                      technical procurement and
+                      operations.
                     </p>
 
                     <p className="about-text">
-                      My strongest technical experience comes from developing SCALE, a large security-focused platform combining containerized services, isolated execution of untrusted code, application security, SAST, dependency vulnerability scanning, AI integration, databases, and full-stack functionality. I am particularly strong at understanding complex systems, integrating multiple technologies, troubleshooting difficult technical problems, and translating requirements into practical implementations.
+                      My strongest technical experience
+                      comes from developing SCALE, a
+                      security-focused platform combining
+                      containerized services, isolated
+                      execution of untrusted code,
+                      application security, SAST,
+                      dependency vulnerability scanning,
+                      AI integration, databases and
+                      full-stack functionality.
                     </p>
 
                     <p className="about-text">
-                      While I focus heavily on robust backend architecture, I also bring strong expertise in frontend development and UI/UX design. This allows me to craft highly intuitive, responsive, and aesthetically polished user interfaces that seamlessly integrate with complex backend services.
+                      I am particularly strong at
+                      understanding complex systems,
+                      integrating multiple technologies,
+                      troubleshooting difficult technical
+                      problems and translating requirements
+                      into practical implementations.
                     </p>
 
-                    <p className="about-text">
-                      Beyond software, my professional experience in industrial automation and technical sourcing has given me practical knowledge of pneumatic systems, mechatronics, industrial components, suppliers, procurement, and international logistics. This combination allows me to approach problems from both an engineering and business perspective.
-                    </p>
-
-                    <p className="about-text">
-                      I am especially interested in backend, platform, security, DevSecOps, cloud, and industrial software engineering, where I can apply my ability to build reliable systems, analyze technical problems deeply, and continuously develop toward advanced engineering roles.
-                    </p>
                   </div>
+
                 </Reveal>
 
                 <Reveal delay={100}>
+
                   <div>
-                    <p className="eyebrow">CORE TOOLKIT & SKILLS</p>
+
+                    <p className="eyebrow">
+                      CORE TOOLKIT & SKILLS
+                    </p>
 
                     <div className="toolkit">
-                      {CORE_STACK.map((item) => (
-                        <div className="tool-row" key={item.label}>
-                          <div className="tool-label">{item.label}</div>
-                          <div className="tool-value">{item.value}</div>
-                        </div>
-                      ))}
+
+                      {TOOLKIT.map(
+                        ([label, value]) => (
+                          <div
+                            className="tool-row"
+                            key={label}
+                          >
+
+                            <div className="tool-label">
+                              {label}
+                            </div>
+
+                            <div className="tool-value">
+                              {value}
+                            </div>
+
+                          </div>
+                        )
+                      )}
+
                     </div>
+
                   </div>
+
                 </Reveal>
+
               </div>
 
               <Reveal delay={100}>
-                <div style={{ marginTop: "80px" }}>
-                  <p className="eyebrow">EDUCATION & CREDENTIALS</p>
+
+                <div style={{ marginTop: "78px" }}>
+
+                  <p className="eyebrow">
+                    EDUCATION & CREDENTIALS
+                  </p>
 
                   <div className="credentials">
-                    {CREDENTIALS.map((item) => (
-                      <article className="credential" key={item.title}>
-                        <div className="credential-label">Credential</div>
-                        <h3>{item.title}</h3>
-                        <p>{item.institution}</p>
-                        <p style={{ marginTop: "8px" }}>{item.detail}</p>
-                      </article>
-                    ))}
+
+                    <article className="credential">
+
+                      <div className="credential-label">
+                        Credential
+                      </div>
+
+                      <h3>
+                        B.Sc. Computer Science
+                      </h3>
+
+                      <p>
+                        Misr International University
+                      </p>
+
+                      <p style={{ marginTop: "8px" }}>
+                        Graduated June 2026. Foundation
+                        in software architecture,
+                        requirements engineering,
+                        relational database design and
+                        algorithmic problem solving.
+                      </p>
+
+                    </article>
+
+                    <article className="credential">
+
+                      <div className="credential-label">
+                        Credential
+                      </div>
+
+                      <h3>
+                        Minor in Software Engineering
+                      </h3>
+
+                      <p>
+                        Misr International University
+                      </p>
+
+                      <p style={{ marginTop: "8px" }}>
+                        Coursework centered on software
+                        architecture, formal requirements
+                        engineering, Agile/Scrum,
+                        quality assurance and testing.
+                      </p>
+
+                    </article>
+
                   </div>
+
                 </div>
+
               </Reveal>
+
             </div>
+
           </section>
 
-          {/* ============================================================
+          {/* =====================================================
               CONTACT
-          ============================================================ */}
-          <section className="contact" id="contact" aria-labelledby="contact-title">
+          ===================================================== */}
+
+          <section
+            className="contact"
+            id="contact"
+            aria-labelledby="contact-title"
+          >
+
             <div className="container">
+
               <Reveal>
-                <p className="eyebrow">CONTACT</p>
+
+                <p className="eyebrow">
+                  CONTACT
+                </p>
+
                 <h2 id="contact-title">
                   Building software
                   <br />
@@ -2475,76 +4445,304 @@ export default function App() {
                 </h2>
 
                 <p className="contact-copy">
-                  Open to software engineering opportunities across backend,
-                  full-stack, systems, platform and security-oriented roles.
-                  For the strongest technical evidence, start with SCALE and the
-                  source code behind it.
+                  Open to software engineering
+                  opportunities across backend,
+                  full-stack, systems, platform and
+                  security-oriented roles.
                 </p>
 
                 <div className="contact-links">
-                  <a className="button button-primary" href={`mailto:${PROFILE.email}`}>
+
+                  <Button
+                    href={`mailto:${PROFILE.email}`}
+                    primary
+                  >
                     <MailIcon />
                     Email me
-                  </a>
+                  </Button>
 
-                  <a className="button" href={`tel:${PROFILE.phone.replace(/\s+/g, '')}`}>
+                  <Button
+                    href={`tel:${PROFILE.phone}`}
+                  >
                     <PhoneIcon />
                     {PROFILE.phone}
-                  </a>
+                  </Button>
 
-                  <a
-                    className="button"
+                  <Button
                     href={PROFILE.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    external
                   >
                     <GithubIcon />
                     GitHub
-                  </a>
+                  </Button>
 
-                  <a
-                    className="button"
+                  <Button
                     href={PROFILE.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    external
                   >
-                    <LinkedInIcon />
+                    <LinkedinIcon />
                     LinkedIn
-                  </a>
+                  </Button>
 
-                  <a
-                    className="button"
+                  <Button
                     href={PROFILE.resume}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                    external
                   >
                     <DownloadIcon />
                     Resume
-                  </a>
+                  </Button>
+
                 </div>
 
-                <div className="availability">{PROFILE.availability}</div>
+                <div className="availability">
+                  {PROFILE.availability}
+                </div>
+
               </Reveal>
+
             </div>
+
           </section>
+
         </main>
 
+        {/* =====================================================
+            FOOTER
+        ===================================================== */}
+
         <footer>
+
           <div className="container footer-inner">
-            <span>© 2026 {PROFILE.name} · {PROFILE.title}</span>
+
+            <span>
+              © 2026 {PROFILE.name} ·{" "}
+              {PROFILE.title}
+            </span>
 
             <div className="footer-links">
-              <a href="#top">Back to top</a>
-              <a href={PROFILE.github} target="_blank" rel="noopener noreferrer">
+
+              <a href="#top">
+                Back to top
+              </a>
+
+              <a
+                href={PROFILE.github}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 GitHub
               </a>
-              <a href={PROFILE.linkedin} target="_blank" rel="noopener noreferrer">
+
+              <a
+                href={PROFILE.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 LinkedIn
               </a>
+
+            </div>
+
+          </div>
+
+        </footer>
+
+      </div>
+
+      {/* =====================================================
+          IMAGE MODAL (For Gallery)
+      ===================================================== */}
+
+      {imageOpen && (
+        <div
+          className="image-modal"
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${SCALE_GALLERY[imageIndex].label} image`}
+          onClick={(event) => {
+            if (event.target === event.currentTarget) {
+              setImageOpen(false);
+            }
+          }}
+        >
+          <div className="image-modal-inner">
+            <div className="modal-top">
+              <span>
+                SCALE · {SCALE_GALLERY[imageIndex].label.toUpperCase()}
+              </span>
+
+              <button
+                className="modal-close"
+                type="button"
+                onClick={() => setImageOpen(false)}
+                aria-label="Close image"
+              >
+                ×
+              </button>
+            </div>
+
+            <div className="image-modal-stage">
+              <img
+                src={SCALE_GALLERY[imageIndex].src}
+                alt={SCALE_GALLERY[imageIndex].alt}
+              />
+
+              <button
+                type="button"
+                className="modal-media-arrow modal-media-prev"
+                onClick={() =>
+                  setImageIndex((index) =>
+                    (index - 1 + SCALE_GALLERY.length) % SCALE_GALLERY.length
+                  )
+                }
+                aria-label="Previous image"
+              >
+                ‹
+              </button>
+
+              <button
+                type="button"
+                className="modal-media-arrow modal-media-next"
+                onClick={() =>
+                  setImageIndex((index) =>
+                    (index + 1) % SCALE_GALLERY.length
+                  )
+                }
+                aria-label="Next image"
+              >
+                ›
+              </button>
+            </div>
+
+            <div className="image-modal-footer">
+              <span>{SCALE_GALLERY[imageIndex].label}</span>
+              <span>
+                {String(imageIndex + 1).padStart(2, "0")} / {String(SCALE_GALLERY.length).padStart(2, "0")}
+              </span>
             </div>
           </div>
-        </footer>
-      </div>
+        </div>
+      )}
+
+      {/* =====================================================
+          AVATAR MODAL
+      ===================================================== */}
+
+      {avatarOpen && (
+        <div
+          className="image-modal"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Profile picture"
+          onClick={(event) => {
+            if (event.target === event.currentTarget) {
+              setAvatarOpen(false);
+            }
+          }}
+        >
+          <div className="image-modal-inner" style={{ maxWidth: "500px" }}>
+            <div className="modal-top">
+              <span>
+                PROFILE · {PROFILE.name.toUpperCase()}
+              </span>
+
+              <button
+                className="modal-close"
+                type="button"
+                onClick={() => setAvatarOpen(false)}
+                aria-label="Close profile picture"
+              >
+                ×
+              </button>
+            </div>
+
+            <div className="image-modal-stage">
+              <img
+                src="./images/profile.png"
+                alt={PROFILE.name}
+                style={{
+                  borderRadius: "50%",
+                  width: "min(100%, 350px)",
+                  aspectRatio: "1 / 1",
+                  objectFit: "cover"
+                }}
+              />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* =====================================================
+          VIDEO MODAL
+      ===================================================== */}
+
+      {videoOpen && (
+        <div
+          className="video-modal"
+          role="dialog"
+          aria-modal="true"
+          aria-label="SCALE marketing video"
+          onClick={(event) => {
+            if (
+              event.target === event.currentTarget
+            ) {
+              setVideoOpen(false);
+            }
+          }}
+        >
+
+          <div className="video-modal-inner">
+
+            <div className="modal-top">
+
+              <span>
+                SCALE · MARKETING PREVIEW
+              </span>
+
+              <button
+                className="modal-close"
+                type="button"
+                onClick={() =>
+                  setVideoOpen(false)
+                }
+                aria-label="Close video"
+              >
+                ×
+              </button>
+
+            </div>
+
+            <video
+              className="modal-video"
+              controls
+              autoPlay
+              playsInline
+              crossOrigin="anonymous"
+              poster="./images/scale-poster.jpg"
+            >
+              <track
+                kind="subtitles"
+                src="./videos/scale-marketing.vtt"
+                srcLang="en"
+                label="English"
+                default
+              />
+              <source
+                src="./videos/scale-marketing.mp4"
+                type="video/mp4"
+              />
+
+              Your browser does not support
+              the video element.
+            </video>
+
+          </div>
+
+        </div>
+      )}
+
     </>
   );
 }
+
+export default App;
